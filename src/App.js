@@ -1,5 +1,6 @@
 import ReactComponent from "./components/ReactComponent";
 import ReactCreateElement from "./components/ReactCreateElement";
+import ReactFunctionalComponent from "./components/ReactFunctionalComponent";
 import ReactPureComponent from "./components/ReactPureComponent";
 
 function App() {
@@ -8,6 +9,7 @@ function App() {
       <ReactCreateElement />
       <ReactComponent />
       <ReactPureComponent />
+      <ReactFunctionalComponent />
     </>
   );
 }
