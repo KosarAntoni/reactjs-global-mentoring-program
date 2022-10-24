@@ -16,6 +16,7 @@ module.exports = {
   },
   plugins: ['react', 'simple-import-sort'],
   rules: {
+    'no-console': 1,
     'simple-import-sort/imports': [
       'error',
       {
