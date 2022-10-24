@@ -1,6 +1,8 @@
 {
     "*/**.{js,ts,jsx,tsx}": [
-        "eslint . --fix",
-        "stylelint '**/*.scss' --fix"
+        "eslint . --fix"
+    ],
+    "*/**.scss": [
+        "stylelint --fix"
     ]
 }
