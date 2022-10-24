@@ -25,7 +25,8 @@ module.exports = {
           ['^atoms(/.*|$)', '^molecules(/.*|$)', '^organisms(/.*|$)', '^templates(/.*|$)'],
           ['^utils(/.*|$)', '^hooks(/.*|$)'],
           ['^\\.'],
-          ['^types(/.*|$)', 'models(.*|$)']
+          ['^types(/.*|$)', 'models(.*|$)'],
+          ['^styles(/.*|$)']
         ]
       }
     ]
