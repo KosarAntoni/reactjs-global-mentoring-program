@@ -8,6 +8,8 @@
   "scripts": {
     "start": "webpack serve",
     "build": "webpack",
+    "lint": "eslint . --cache",
+    "lint:fix": "eslint . --cache --fix",
     "prepare": "husky install"
   },
   "devDependencies": {
