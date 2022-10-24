@@ -14,6 +14,19 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json'
   },
-  plugins: ['react'],
-  rules: {}
+  plugins: ['react', 'simple-import-sort'],
+  rules: {
+    'simple-import-sort/imports': [
+      'error',
+      {
+        groups: [
+          [`^(${require('module').builtinModules.join('|')})(/|$)`, '^react', '^gatsby', '^@?\\w'],
+          ['^atoms(/.*|$)', '^molecules(/.*|$)', '^organisms(/.*|$)', '^templates(/.*|$)'],
+          ['^utils(/.*|$)', '^hooks(/.*|$)'],
+          ['^\\.'],
+          ['^types(/.*|$)', 'models(.*|$)']
+        ]
+      }
+    ]
+  }
 }
