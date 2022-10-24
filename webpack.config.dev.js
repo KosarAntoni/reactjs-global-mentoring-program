@@ -1,47 +1,47 @@
-const path = require("path");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
-const Dotenv = require("dotenv-webpack");
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
+const Dotenv = require('dotenv-webpack')
 
 module.exports = {
-  mode: "development",
-  entry: path.join(__dirname, "src", "index.tsx"),
+  mode: 'development',
+  entry: path.join(__dirname, 'src', 'index.tsx'),
   output: {
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(__dirname, 'dist')
   },
-  devtool: "inline-source-map",
+  devtool: 'inline-source-map',
   devServer: {
     static: {
-      directory: path.join(__dirname, "dist"),
+      directory: path.join(__dirname, 'dist')
     },
-    hot: true,
+    hot: true
   },
   module: {
     rules: [
       {
         test: /\.(ts|tsx)?$/,
-        use: "ts-loader",
-        exclude: /node_modules/,
+        use: 'ts-loader',
+        exclude: /node_modules/
       },
       {
         test: /\.?(js|jsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
           options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
-          },
-        },
-      },
-    ],
+            presets: ['@babel/preset-env', '@babel/preset-react']
+          }
+        }
+      }
+    ]
   },
   resolve: {
-    extensions: [".tsx", ".ts", "jsx", ".js"],
+    extensions: ['.tsx', '.ts', 'jsx', '.js']
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "index.html"),
+      template: path.join(__dirname, 'src', 'index.html')
     }),
-    new Dotenv(),
+    new Dotenv()
   ],
-  stats: "minimal",
-};
+  stats: 'minimal'
+}
