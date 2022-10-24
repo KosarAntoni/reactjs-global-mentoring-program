@@ -7,6 +7,13 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "build"),
   },
+  devtool: "inline-source-map",
+  devServer: {
+    static: {
+      directory: path.join(__dirname, "build"),
+    },
+    hot: true,
+  },
   module: {
     rules: [
       {
@@ -26,4 +33,5 @@ module.exports = {
       template: path.join(__dirname, "src", "index.html"),
     }),
   ],
+  stats: "minimal",
 };
