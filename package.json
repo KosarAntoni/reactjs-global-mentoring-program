@@ -9,9 +9,11 @@
     "start": "webpack serve",
     "build": "webpack",
     "lint": "eslint . --cache",
-    "lint:fix": "eslint . --cache --fix",
+    "lint:fix": "npm run lint --fix",
     "lint:styles": "stylelint '**/*.scss' --cache",
-    "lint:styles-fix": "stylelint '**/*.scss' --cache --fix",
+    "lint:styles-fix": "npm run lint:styles --fix",
+    "clean": "npx rimraf dist",
+    "clean:all": "npm run clean build node_modules",
     "prepare": "husky install"
   },
   "devDependencies": {
@@ -35,6 +37,7 @@
     "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
     "mini-css-extract-plugin": "^2.6.1",
+    "rimraf": "^3.0.2",
     "sass": "^1.55.0",
     "sass-loader": "^13.1.0",
     "style-loader": "^3.3.1",
