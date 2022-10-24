@@ -3,6 +3,6 @@
         "eslint . --fix"
     ],
     "*/**.scss": [
-        "stylelint --fix"
+        "stylelint '**/*.scss' --fix"
     ]
 }
