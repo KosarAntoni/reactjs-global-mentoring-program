@@ -2,7 +2,7 @@
     "*/**.{js,ts,jsx,tsx}": [
         "eslint . --fix"
     ],
-    "*/**.scss": [
+    "*.scss": [
         "stylelint '**/*.scss' --fix"
     ]
 }
