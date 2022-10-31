@@ -1,9 +1,9 @@
-import React, { ReactElement } from 'react'
+import React, { FC } from 'react'
 
-import './App.styles.scss'
+import Layout from 'templates/Layout'
 
-const App = (): ReactElement => {
-  return (<h1 className='title'>Hello World!</h1>)
+const App: FC = () => {
+  return (<Layout/>)
 }
 
 export default App

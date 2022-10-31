@@ -22,7 +22,7 @@ module.exports = {
       {
         groups: [
           [`^(${require('module').builtinModules.join('|')})(/|$)`, '^react', '^gatsby', '^@?\\w'],
-          ['^atoms(/.*|$)', '^molecules(/.*|$)', '^organisms(/.*|$)', '^templates(/.*|$)'],
+          ['^components(/.*|$)', '^containers(/.*|$)', '^templates(/.*|$)'],
           ['^utils(/.*|$)', '^hooks(/.*|$)'],
           ['^\\.'],
           ['^types(/.*|$)', 'models(.*|$)'],
