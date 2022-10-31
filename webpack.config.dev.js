@@ -50,7 +50,7 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', 'jsx', '.js'],
     alias: {
-      commponents: path.resolve(__dirname, 'src/components/'),
+      components: path.resolve(__dirname, 'src/components/'),
       containers: path.resolve(__dirname, 'src/containers/'),
       templates: path.resolve(__dirname, 'src/templates/')
     }
