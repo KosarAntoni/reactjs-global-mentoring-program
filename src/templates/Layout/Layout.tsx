@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
 
 const Layout: FC = () => {
-  return <>
-  </>
+  return (
+    <></>
+  )
 }
 
 export default Layout
