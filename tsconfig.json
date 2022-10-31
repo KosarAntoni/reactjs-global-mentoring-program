@@ -14,7 +14,8 @@
     "paths": {
       "components/*": ["components/*"],
       "containers/*": ["containers/*"],
-      "templates/*": ["templates/*"]
+      "templates/*": ["templates/*"],
+      "styles/*": ["styles/*"]
     }
   }
 }
