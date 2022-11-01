@@ -8,14 +8,14 @@ import './GenreSelect.styles.scss'
 const GenreSelect: FC<GenreSelectProps> = ({ genres, selectedGenre, handleSelect, className }) => {
   return (
     <div className={classNames('genre-select', className)}>
-      {genres.map(({ id, name }) => (
+      {genres.map((genre) => (
         <button
-            className={classNames('genre-select__genre', { 'genre-select__genre--selected': id === selectedGenre?.id })}
-            key={id}
-            onClick={() => handleSelect(id)}
+            className={classNames('genre-select__genre', { 'genre-select__genre--selected': genre.id === selectedGenre?.id })}
+            key={genre.id}
+            onClick={() => handleSelect(genre)}
             type='button'
         >
-          {name}
+          {genre.name}
         </button>
       ))}
     </div>

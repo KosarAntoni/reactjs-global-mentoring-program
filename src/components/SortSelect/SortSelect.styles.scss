@@ -1,0 +1,33 @@
+.sort-select {
+  position: relative;
+
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  padding-right: 1.8rem;
+
+  font-size: 16px;
+  color: var(--primary-text);
+  text-transform: uppercase;
+
+  &::after {
+    content: "";
+
+    position: absolute;
+    right: 0;
+    transform: rotate(-45deg) translateY(-50%);
+
+    width: 0.5rem;
+    height: 0.5rem;
+
+    border-bottom: 0.3rem solid var(--pastele-red);
+    border-left: 0.3rem solid var(--pastele-red);
+  }
+
+  &__label {
+    margin-right: 3.5rem;
+
+    opacity: 0.6;
+  }
+}
