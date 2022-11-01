@@ -1,6 +1,6 @@
 
 export interface ButtonProps {
   children: string
-  style?: 'transaprent' | 'solid' | 'outline'
+  style?: 'transparent' | 'solid' | 'outline'
   className?: string
 }
