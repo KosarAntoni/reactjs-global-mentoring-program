@@ -10,11 +10,18 @@ import './Search.styles.scss'
 
 const Search: FC<SearchProps> = ({ className }) => (
   <div className={classNames('search', className)}>
+    <h1 className='search__heading'>FIND YOUR MOViE</h1>
+
     <Input
+        className='search__input'
         placeholder='What do you want to watch?'
     />
 
-    <Button>Search</Button>
+    <Button
+        className='search__button'
+    >
+      Search
+    </Button>
   </div>
 )
 
