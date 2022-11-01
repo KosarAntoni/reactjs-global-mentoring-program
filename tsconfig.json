@@ -12,6 +12,7 @@
     "strict": true,
     "baseUrl": "src",
     "paths": {
+      "assets/*": ["assets/*"],
       "components/*": ["components/*"],
       "containers/*": ["containers/*"],
       "templates/*": ["templates/*"],
