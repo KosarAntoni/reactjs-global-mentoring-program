@@ -1,5 +1,15 @@
-.title {
-  display: block;
+@import "./styles/normalize";
+@import "./styles/variables";
+@import "./styles/fonts";
 
-  color: red;
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: var(--primary-font);
+  font-size: 1.6rem;
+  color: var(--primary-color);
+
+  background-color: var(--page-background);
 }

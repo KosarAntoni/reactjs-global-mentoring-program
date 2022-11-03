@@ -12,6 +12,14 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.(png|jpe?g|gif)$/i,
+        use: [
+          {
+            loader: 'file-loader'
+          }
+        ]
+      },
+      {
         test: /\.(ts|tsx)?$/,
         use: 'ts-loader',
         exclude: /node_modules/
@@ -41,7 +49,13 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: ['.tsx', '.ts', 'jsx', '.js']
+    extensions: ['.tsx', '.ts', 'jsx', '.js'],
+    alias: {
+      assets: path.resolve(__dirname, 'src/assets/'),
+      commponents: path.resolve(__dirname, 'src/components/'),
+      containers: path.resolve(__dirname, 'src/containers/'),
+      templates: path.resolve(__dirname, 'src/templates/')
+    }
   },
   plugins: [
     new HtmlWebpackPlugin({
