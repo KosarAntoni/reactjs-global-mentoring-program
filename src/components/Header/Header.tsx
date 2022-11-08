@@ -10,13 +10,13 @@ import './Header.styles.scss'
 const Header: FC = () => (
   <header className='header'>
     <img
-      alt="header-background"
-      className="header__background"
+      alt='header-background'
+      className='header__background'
       src={background}
     />
 
     <Logo/>
-    <Button style="transparent">+ add movie</Button>
+    <Button style='transparent'>+ add movie</Button>
     <Search className='header__search'/>
   </header>
 )
