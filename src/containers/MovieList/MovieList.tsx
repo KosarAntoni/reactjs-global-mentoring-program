@@ -31,6 +31,11 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
         {moviesMock.slice(0, 6).map(({ id, genres, poster_path: posterPath, release_date: releaseDate, title }) => (
           <MovieCard
             key={id}
+            options={
+              <>
+                <div>Edit</div>
+                <div>Delete</div>
+              </>}
             {...{ title, genres, posterPath, releaseDate }}
         />
         ))}
