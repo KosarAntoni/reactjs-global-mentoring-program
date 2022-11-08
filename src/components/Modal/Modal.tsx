@@ -6,7 +6,12 @@ import { ModalProps } from './Modal.models'
 
 import './Modal.styles.scss'
 
-const Modal: FC<ModalProps> = function Modal ({ children, isOpen, handleClose, className }: ModalProps) {
+const Modal: FC<ModalProps> = function Modal ({
+  children,
+  isOpen,
+  handleClose,
+  className
+}: ModalProps) {
   const modalRoot = document.getElementById('modal-root')
   if (modalRoot === null) throw new Error('Failed to find the modal root element')
 
@@ -18,16 +23,17 @@ const Modal: FC<ModalProps> = function Modal ({ children, isOpen, handleClose, c
   useEffect(() => {
     window.addEventListener('keydown', onEscPress)
 
-    return () => { window.removeEventListener('keydown', onEscPress) }
+    return () => {
+      window.removeEventListener('keydown', onEscPress)
+    }
   })
 
   return (
-
     createPortal(
       isOpen && (
         <div className='modal'>
           <div className={classNames('modal__content', className)}>
-            <button onClick={handleClose} type='button'>×</button>
+            <button className='modal__close-button' onClick={handleClose} type='button'>×</button>
             {children}
           </div>
 
