@@ -33,7 +33,7 @@ const Modal: FC<ModalProps> = function Modal ({
       isOpen && (
         <div className='modal'>
           <div className={classNames('modal__content', className)}>
-            <button className='modal__close-button' onClick={handleClose} type='button'>×</button>
+            <button className='modal__close-button' onClick={handleClose} type='button'>&#x2715;</button>
             {children}
           </div>
 

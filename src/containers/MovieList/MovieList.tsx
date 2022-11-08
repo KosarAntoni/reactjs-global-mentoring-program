@@ -5,6 +5,7 @@ import GenreSelect from 'components/GenreSelect'
 import MovieCard from 'components/MovieCard'
 import MovieDelete from 'components/MovieDelete'
 import SortSelect from 'components/SortSelect'
+import SuccessModal from 'components/SuccessModal'
 
 import { genresMock, moviesMock, sortOptionsMock } from '../../mock'
 
@@ -14,6 +15,7 @@ import './MovieList.styles.scss'
 
 const MovieList: FC<MovieListProps> = ({ className }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
+  const [isDeleteSuccessModalOpen, setIsDeleteSuccessModalOpen] = useState<boolean>(false)
 
   const handleDeleteClick = (): void => {
     setIsDeleteModalOpen(true)
@@ -69,7 +71,17 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
         </div>
       </div>
 
-      <MovieDelete handleClose={() => setIsDeleteModalOpen(false)} isOpen={isDeleteModalOpen}/>
+      <MovieDelete
+        handleClose={() => setIsDeleteModalOpen(false)}
+        handleConfirm={() => setIsDeleteSuccessModalOpen(true)}
+        isOpen={isDeleteModalOpen}
+      />
+
+      <SuccessModal
+        description='The movie has been deleted from database successfully'
+        handleClose={() => setIsDeleteSuccessModalOpen(false)}
+        isOpen={isDeleteSuccessModalOpen}
+      />
     </>
   )
 }

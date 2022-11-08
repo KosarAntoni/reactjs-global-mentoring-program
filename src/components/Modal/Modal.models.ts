@@ -1,7 +1,7 @@
-import { ReactElement } from 'react'
+import { ReactNode } from 'react'
 
 export interface ModalProps {
-  children: ReactElement | ReactElement[]
+  children: ReactNode
   isOpen?: boolean
   handleClose: () => void
   className?: string

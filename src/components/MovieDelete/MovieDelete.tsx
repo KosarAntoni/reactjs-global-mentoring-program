@@ -7,8 +7,9 @@ import { MovieDeleteProps } from './MovieDelete.models'
 
 import './MovieDelete.styles.scss'
 
-const MovieDelete: FC<MovieDeleteProps> = ({ handleClose, isOpen }) => {
+const MovieDelete: FC<MovieDeleteProps> = ({ handleClose, handleConfirm, isOpen }) => {
   const handleConfirmClick = (): void => {
+    handleConfirm()
     handleClose()
   }
 

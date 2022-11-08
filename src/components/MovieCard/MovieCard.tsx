@@ -16,7 +16,7 @@ const MovieCard: FC<MovieCardProps> = ({ title, genres, posterPath, releaseDate,
         <button
         onClick={() => setIsSelectOpen((prevState) => !prevState)}
       >
-          {isSelectOpen ? '×' : '⋮'}
+          {isSelectOpen ? '\u2715' : '\u22EE'}
         </button>
 
         {isSelectOpen && options}
