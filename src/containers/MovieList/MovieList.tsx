@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 import GenreSelect from 'components/GenreSelect'
 import MovieCard from 'components/MovieCard'
-import MovieDeleteModal from 'components/MovieDelete'
+import MovieDeleteModal from 'components/MovieDeleteModal'
 import SortSelect from 'components/SortSelect'
 import SuccessModal from 'components/SuccessModal'
 
