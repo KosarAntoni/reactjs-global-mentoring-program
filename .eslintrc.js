@@ -19,6 +19,7 @@ module.exports = {
   },
   plugins: ['react', 'simple-import-sort'],
   rules: {
+    '@typescript-eslint/strict-boolean-expressions': 0,
     'no-console': 1,
     'react/jsx-newline': [2, { prevent: true, allowMultilines: true }],
     'react/jsx-first-prop-new-line': [2, 'multiline'],

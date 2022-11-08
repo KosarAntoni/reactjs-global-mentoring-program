@@ -11,4 +11,8 @@
   --primary-text: var(--white);
   --secondary-text: var(--light-gray);
   --primary-font: "Montserrat", sans-serif;
+
+  // z-index
+  --ground: 0;
+  --modal-content: 10;
 }
