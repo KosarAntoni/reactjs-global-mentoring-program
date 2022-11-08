@@ -3,7 +3,7 @@ import classNames from 'classnames'
 
 import GenreSelect from 'components/GenreSelect'
 import MovieCard from 'components/MovieCard'
-import MovieDelete from 'components/MovieDelete'
+import MovieDeleteModal from 'components/MovieDelete'
 import SortSelect from 'components/SortSelect'
 import SuccessModal from 'components/SuccessModal'
 
@@ -71,7 +71,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
         </div>
       </div>
 
-      <MovieDelete
+      <MovieDeleteModal
         handleClose={() => setIsDeleteModalOpen(false)}
         handleConfirm={() => setIsDeleteSuccessModalOpen(true)}
         isOpen={isDeleteModalOpen}
