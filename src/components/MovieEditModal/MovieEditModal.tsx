@@ -3,6 +3,7 @@ import React, { ChangeEvent, FC, FormEvent, useState } from 'react'
 import Button from 'components/Button'
 import InputField from 'components/InputField'
 import Modal from 'components/Modal'
+import TextareaField from 'components/TextareaField'
 
 import { EditForm, MovieEditModalProps } from './MovieEditModal.models'
 
@@ -26,7 +27,7 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
     handleSubmit(formData)
   }
 
-  const handleInputChange = (event: ChangeEvent<HTMLInputElement>, key: string): void =>
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, key: string): void =>
     setFormData((prevState) => {
       return ({
         ...prevState,
@@ -83,7 +84,7 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
           onChange={(event) => handleInputChange(event, 'vote_average')}
           step='0.1'
           type='number'
-          value={`${formData.vote_average}`}
+          value={formData.vote_average.toString()}
         />
 
         <InputField
@@ -100,7 +101,16 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
           label={'RUNTIME'}
           onChange={(event) => handleInputChange(event, 'runtime')}
           type='time'
-          value={`${formData.runtime}`}
+          value={formData.runtime}
+        />
+
+        <TextareaField
+          className='movie-edit-modal__overview'
+          id={'overview'}
+          label={'overview'}
+          onChange={(event) => handleInputChange(event, 'overview')}
+          rows={7}
+          value={formData.overview}
         />
 
         <footer>
