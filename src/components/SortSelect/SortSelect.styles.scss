@@ -11,23 +11,39 @@
   color: var(--primary-text);
   text-transform: uppercase;
 
-  &::after {
-    content: "";
-
-    position: absolute;
-    right: 0;
-    transform: rotate(-45deg) translateY(-50%);
-
-    width: 0.5rem;
-    height: 0.5rem;
-
-    border-bottom: 0.3rem solid var(--pastele-red);
-    border-left: 0.3rem solid var(--pastele-red);
-  }
-
   &__label {
-    margin-right: 3.5rem;
+    margin-right: 2.2rem;
 
     opacity: 0.6;
+  }
+
+  &__toggle {
+    min-width: 16rem;
+
+    color: var(--primary-text);
+    text-align: left;
+  }
+
+  ul {
+    margin: 0;
+    padding: 0;
+
+    list-style: none;
+
+    li {
+      margin-bottom: 0.8rem;
+
+      button {
+        cursor: pointer;
+
+        margin: 0;
+        padding: 0;
+
+        color: var(--primary-text);
+
+        background: none;
+        border: none;
+      }
+    }
   }
 }

@@ -5,6 +5,7 @@ import GenreSelect from 'components/GenreSelect'
 import MovieCard from 'components/MovieCard'
 import MovieDeleteModal from 'components/MovieDeleteModal'
 import SortSelect from 'components/SortSelect'
+import { SortOption } from 'components/SortSelect/SortSelect.models'
 import SuccessModal from 'components/SuccessModal'
 
 import { genresMock, moviesMock, sortOptionsMock } from '../../mock'
@@ -16,6 +17,7 @@ import './MovieList.styles.scss'
 const MovieList: FC<MovieListProps> = ({ className }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [isDeleteSuccessModalOpen, setIsDeleteSuccessModalOpen] = useState<boolean>(false)
+  const [sortOption, setSortoption] = useState<SortOption>(sortOptionsMock[0])
 
   const handleDeleteClick = (): void => {
     setIsDeleteModalOpen(true)
@@ -25,8 +27,8 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     console.log('genre selected')
   }
 
-  const handleSortSelect = (): void => {
-    console.log('sort select')
+  const handleSortSelect = (option: SortOption): void => {
+    setSortoption(option)
   }
 
   return (
@@ -34,7 +36,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
       <div className={classNames('movie-list', className)}>
         <header>
           <GenreSelect genres={genresMock} handleSelect={handleGenreSelect} selectedGenre={genresMock[0]}/>
-          <SortSelect handleSelect={handleSortSelect} options={sortOptionsMock} selectedOption={sortOptionsMock[0]}/>
+          <SortSelect handleSelect={handleSortSelect} options={sortOptionsMock} selectedOption={sortOption}/>
         </header>
 
         <p className='movie-list__count'>
