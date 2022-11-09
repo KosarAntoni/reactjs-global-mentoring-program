@@ -18,7 +18,7 @@
   }
 
   &__toggle {
-    min-width: 16rem;
+    // min-width: 14rem;
 
     color: var(--primary-text);
     text-align: left;
@@ -40,6 +40,7 @@
         padding: 0;
 
         color: var(--primary-text);
+        white-space: nowrap;
 
         background: none;
         border: none;
