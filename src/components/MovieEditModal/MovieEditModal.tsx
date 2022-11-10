@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, FormEvent, useState } from 'react'
+import React, { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react'
 
 import Button from 'components/Button'
 import CheckboxField from 'components/CheckboxField'
@@ -13,15 +13,21 @@ import { EditForm, MovieEditModalProps } from './MovieEditModal.models'
 
 import './MovieEditModal.styles.scss'
 
-const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSubmit, heading }) => {
-  const [formData, setFormData] = useState<EditForm>({
-    title: '',
-    vote_average: 0,
-    release_date: new Date(),
-    url: '',
-    overview: '',
-    genres: [],
-    runtime: '00:00'
+const initialState = {
+  title: '',
+  vote_average: 0,
+  release_date: new Date(),
+  url: '',
+  overview: '',
+  genres: [],
+  runtime: '00:00'
+}
+
+const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSubmit, heading, movieData }) => {
+  const [formData, setFormData] = useState<EditForm>(initialState)
+
+  useEffect(() => {
+    if (formData === initialState && movieData) setFormData(movieData)
   })
 
   const handleFormSubmit = (event: FormEvent): void => {
@@ -46,6 +52,8 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
         [key]: new Date(event.target.value)
       })
     })
+
+  const handleReset = (): void => { setFormData(initialState) }
 
   return (
     <Modal {...{ isOpen, handleClose }}>
@@ -124,7 +132,7 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
         />
 
         <footer>
-          <Button style='outline' type='reset'>Reset</Button>
+          <Button onClick={handleReset} style='outline' type='reset'>Reset</Button>
           <Button type='submit'>Submit</Button>
         </footer>
       </form>

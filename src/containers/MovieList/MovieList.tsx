@@ -4,6 +4,7 @@ import classNames from 'classnames'
 import GenreSelect from 'components/GenreSelect'
 import MovieCard from 'components/MovieCard'
 import MovieDeleteModal from 'components/MovieDeleteModal'
+import MovieEditModal from 'components/MovieEditModal'
 import SortSelect from 'components/SortSelect'
 import { SortOption } from 'components/SortSelect/SortSelect.models'
 import SuccessModal from 'components/SuccessModal'
@@ -17,10 +18,25 @@ import './MovieList.styles.scss'
 const MovieList: FC<MovieListProps> = ({ className }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [isDeleteSuccessModalOpen, setIsDeleteSuccessModalOpen] = useState<boolean>(false)
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
+  const [isEditSuccessModalOpen, setIsEditSuccessModalOpen] = useState<boolean>(false)
+  const [editableMovieId, setEditableMovieId] = useState<string>('')
+
   const [sortOption, setSortoption] = useState<SortOption>(sortOptionsMock[0])
 
   const handleDeleteClick = (): void => {
     setIsDeleteModalOpen(true)
+  }
+
+  const handleEditClick = (id: string): void => {
+    setIsEditModalOpen(true)
+    setEditableMovieId(id)
+  }
+
+  const handleEditSubmit = (): void => {
+    setIsEditSuccessModalOpen(true)
+    setEditableMovieId('')
   }
 
   const handleGenreSelect = (): void => {
@@ -59,7 +75,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
               key={id}
               options={
                 <ul>
-                  <li>Edit</li>
+                  <li onClick={() => handleEditClick(id.toString())}>Edit</li>
                   <li onClick={handleDeleteClick}>Delete</li>
                 </ul>}
               {...{
@@ -83,6 +99,33 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
         description='The movie has been deleted from database successfully'
         handleClose={() => setIsDeleteSuccessModalOpen(false)}
         isOpen={isDeleteSuccessModalOpen}
+      />
+
+      <MovieEditModal
+        handleClose={() => setIsEditModalOpen(false)}
+        handleSubmit={handleEditSubmit}
+        heading='EDIT MOVIE'
+        isOpen={isEditModalOpen}
+        movieData={(() => {
+          if (!editableMovieId) return
+          const [movie] = moviesMock.filter(({ id }) => id.toString() === editableMovieId.toString())
+
+          return ({
+            title: movie.title,
+            vote_average: movie.vote_average,
+            release_date: new Date(movie.release_date),
+            url: '',
+            overview: movie.overview,
+            genres: movie.genres,
+            runtime: '00:00'
+          })
+        })()}
+      />
+
+      <SuccessModal
+        description='The movie has been edited successfully'
+        handleClose={() => setIsEditSuccessModalOpen(false)}
+        isOpen={isEditSuccessModalOpen}
       />
     </>
   )
