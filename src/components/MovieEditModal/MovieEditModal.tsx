@@ -1,9 +1,13 @@
 import React, { ChangeEvent, FC, FormEvent, useState } from 'react'
 
 import Button from 'components/Button'
+import CheckboxField from 'components/CheckboxField'
+import Dropdown from 'components/Dropdown'
 import InputField from 'components/InputField'
 import Modal from 'components/Modal'
 import TextareaField from 'components/TextareaField'
+
+import { genresMock } from '../../mock'
 
 import { EditForm, MovieEditModalProps } from './MovieEditModal.models'
 
@@ -87,13 +91,19 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
           value={formData.vote_average.toString()}
         />
 
-        <InputField
-          className='movie-edit-modal__genres'
-          id={'genres'}
-          label={'genre'}
-          onChange={(event) => handleInputChange(event, 'genres')}
-          value={formData.genres.join()}
-        />
+        <div className='movie-edit-modal__genres'>
+          <span>Genre</span>
+
+          <Dropdown toggle='Select Genre'>
+            <ul>
+              {genresMock.filter(({ id }) => id !== 'all').map((genre) => (
+                <li key={genre.id}>
+                  <CheckboxField id={genre.id} label={genre.name}/>
+                </li>
+              ))}
+            </ul>
+          </Dropdown>
+        </div>
 
         <InputField
           className='movie-edit-modal__runtime'

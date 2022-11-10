@@ -15,6 +15,37 @@
     text-transform: uppercase;
   }
 
+  &__genres {
+    & > span {
+      color: var(--pastele-red);
+      text-transform: uppercase;
+    }
+
+    button {
+      padding: 1.8rem;
+
+      color: var(--primary-text);
+
+      opacity: 0.7;
+      background-color: var(--light-gray);
+      border: none;
+      border-radius: 4px;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+
+      list-style: none;
+    }
+  }
+
+  &__runtime {
+    .input {
+      padding: 1.6rem 1.8rem;
+    }
+  }
+
   &__overview {
     grid-column: 1 / 3;
   }
