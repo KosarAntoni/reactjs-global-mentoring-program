@@ -1,13 +1,28 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import classNames from 'classnames'
 
 import { MovieCardProps } from './MovieCard.models'
 
 import './MovieCard.styles.scss'
 
-const MovieCard: FC<MovieCardProps> = ({ title, genres, posterPath, releaseDate, className }) => {
+const MovieCard: FC<MovieCardProps> = ({ title, genres, posterPath, releaseDate, options, className }) => {
+  const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false)
+
   return (
     <div className={classNames('movie-card', className)}>
+
+      {options && (
+      <div className={classNames('movie-card__select', { 'movie-card__select--open': isSelectOpen })}>
+        <button
+        onClick={() => setIsSelectOpen((prevState) => !prevState)}
+      >
+          {isSelectOpen ? '\u2715' : '\u22EE'}
+        </button>
+
+        {isSelectOpen && options}
+      </div>
+      )}
+
       <img alt={title} src={posterPath} />
 
       <footer>

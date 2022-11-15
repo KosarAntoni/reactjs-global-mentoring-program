@@ -1,0 +1,28 @@
+.movie-delete-modal {
+  display: flex;
+  flex-direction: column;
+
+  min-width: 600px;
+  padding-right: 8rem;
+  padding-left: 8rem;
+
+  color: var(--primary-text);
+
+  h2 {
+    margin-bottom: 3.7rem;
+
+    font-size: 4rem;
+    font-weight: 300;
+    text-transform: uppercase;
+  }
+
+  p {
+    margin-bottom: 5rem;
+
+    font-size: 2rem;
+  }
+
+  &__confirm-button {
+    align-self: flex-end;
+  }
+}

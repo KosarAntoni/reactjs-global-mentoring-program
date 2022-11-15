@@ -1,0 +1,23 @@
+.input-field {
+  position: relative;
+
+  display: flex;
+  flex-direction: column;
+
+  padding-bottom: 1.8rem;
+
+  &__label {
+    font-size: 1.6rem;
+    font-weight: 500;
+    color: var(--pastele-red);
+    text-transform: uppercase;
+  }
+
+  &__error {
+    position: absolute;
+    bottom: 0;
+
+    font-size: 1.4rem;
+    color: var(--pastele-red);
+  }
+}
