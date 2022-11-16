@@ -16,7 +16,8 @@
       "components/*": ["components/*"],
       "containers/*": ["containers/*"],
       "templates/*": ["templates/*"],
-      "styles/*": ["styles/*"]
+      "styles/*": ["styles/*"],
+      "utilities/*": ["utilities/*"]
     }
   }
 }
