@@ -1,5 +1,6 @@
 import React, { FC, useState } from 'react'
 import classNames from 'classnames'
+import { formatGenres } from 'utilities'
 
 import { MovieCardProps } from './MovieCard.models'
 
@@ -31,7 +32,7 @@ const MovieCard: FC<MovieCardProps> = ({ title, genres, posterPath, releaseDate,
         </h3>
 
         <p>
-          {genres.length > 2 ? genres.join(', ') : genres.join(' & ')}
+          {formatGenres(genres)}
         </p>
 
         <span>
