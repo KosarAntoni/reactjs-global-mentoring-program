@@ -13,18 +13,19 @@ import './Layout.styles.scss'
 const Layout: FC = () => {
   const [selectedMovie, setSelectedMovie] = useState<MovieDetailsProps | undefined>(undefined)
 
-  const handleMovieSelect = (id: number): void => {
+  const handleMovieSelect = (id?: number): void => {
+    if (!id) { setSelectedMovie(undefined) }
+
     const [movie] = moviesMock.filter((movie) => movie.id === id)
 
     if (!movie) return
-
     setSelectedMovie(movie)
   }
 
   return (
     <div className='layout'>
       <ErrorBoundary>
-        <Header movie={selectedMovie}/>
+        <Header handleDetailsClose={() => handleMovieSelect()} movie={selectedMovie}/>
         <MovieList handleMovieSelect={(id) => handleMovieSelect(id)}/>
         <Footer/>
       </ErrorBoundary>

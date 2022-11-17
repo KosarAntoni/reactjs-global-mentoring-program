@@ -12,7 +12,7 @@ import { HeaderProps } from './Header.models'
 
 import './Header.styles.scss'
 
-const Header: FC<HeaderProps> = ({ movie }) => {
+const Header: FC<HeaderProps> = ({ movie, handleDetailsClose }) => {
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
   const [isAddSuccessModalOpen, setIsAddSuccessModalOpen] = useState<boolean>(false)
 
@@ -25,6 +25,12 @@ const Header: FC<HeaderProps> = ({ movie }) => {
   return (
     <>
       <header className='header'>
+        <Logo/>
+
+        {movie
+          ? <button className='header__search-button' onClick={handleDetailsClose} type='button'/>
+          : <Button onClick={() => setIsAddModalOpen(true)} style='transparent'>+ add movie</Button>}
+
         {movie
           ? <MovieDetails {...movie} className='header__movie-details'/>
           : (
@@ -40,8 +46,6 @@ const Header: FC<HeaderProps> = ({ movie }) => {
             )
         }
 
-        <Logo/>
-        <Button onClick={() => setIsAddModalOpen(true)} style='transparent'>+ add movie</Button>
       </header>
 
       <MovieEditModal
