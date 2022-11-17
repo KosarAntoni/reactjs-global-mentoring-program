@@ -7,4 +7,5 @@ export interface MovieCardProps {
   posterPath: string
   options?: ReactElement
   className?: string
+  onClick?: () => void
 }

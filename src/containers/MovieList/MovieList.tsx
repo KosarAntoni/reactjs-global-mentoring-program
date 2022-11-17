@@ -15,7 +15,7 @@ import { MovieListProps } from './MovieList.models'
 
 import './MovieList.styles.scss'
 
-const MovieList: FC<MovieListProps> = ({ className }) => {
+const MovieList: FC<MovieListProps> = ({ className, handleMovieSelect }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [isDeleteSuccessModalOpen, setIsDeleteSuccessModalOpen] = useState<boolean>(false)
 
@@ -47,6 +47,11 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     setSortoption(option)
   }
 
+  const handleCardClick = (id: number): void => {
+    if (!handleMovieSelect) return
+    handleMovieSelect(id)
+  }
+
   return (
     <>
       <div className={classNames('movie-list', className)}>
@@ -73,11 +78,12 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
           }) => (
             <MovieCard
               key={id}
-              options={
-                <ul>
-                  <li onClick={() => handleEditClick(id.toString())}>Edit</li>
-                  <li onClick={handleDeleteClick}>Delete</li>
-                </ul>}
+              onClick={() => handleCardClick(id)}
+                options={
+                  <ul>
+                    <li onClick={() => handleEditClick(id.toString())}>Edit</li>
+                    <li onClick={handleDeleteClick}>Delete</li>
+                  </ul>}
               {...{
                 title,
                 genres,

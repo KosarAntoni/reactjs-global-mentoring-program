@@ -6,8 +6,16 @@ import { MovieCardProps } from './MovieCard.models'
 
 import './MovieCard.styles.scss'
 
-const MovieCard: FC<MovieCardProps> = ({ title, genres, posterPath, releaseDate, options, className }) => {
+const MovieCard: FC<MovieCardProps> = ({ title, genres, posterPath, releaseDate, options, className, onClick }) => {
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false)
+
+  const handleCardClick = (e: React.MouseEvent<HTMLElement>): void => {
+    if (!onClick) return
+
+    e.stopPropagation()
+    e.preventDefault()
+    onClick()
+  }
 
   return (
     <div className={classNames('movie-card', className)}>
@@ -24,9 +32,9 @@ const MovieCard: FC<MovieCardProps> = ({ title, genres, posterPath, releaseDate,
       </div>
       )}
 
-      <img alt={title} src={posterPath} />
+      <img alt={title} onClick={(e) => handleCardClick(e)} src={posterPath}/>
 
-      <footer>
+      <footer onClick={(e) => handleCardClick(e)}>
         <h3>
           {title}
         </h3>
