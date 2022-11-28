@@ -17,7 +17,8 @@
       "containers/*": ["containers/*"],
       "templates/*": ["templates/*"],
       "styles/*": ["styles/*"],
-      "utilities/*": ["utilities/*"]
+      "utilities/*": ["utilities/*"],
+      "store/*": ["store/*"]
     }
   }
 }
