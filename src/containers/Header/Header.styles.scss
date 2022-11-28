@@ -8,8 +8,7 @@
   row-gap: 3.5rem;
 
   height: 100%;
-  max-height: 40rem;
-  padding: 1.8rem 7rem 15rem;
+  padding: 1.8rem 7rem;
 
   &__background {
     position: absolute;
@@ -27,6 +26,46 @@
     grid-area: 2 / 1 / 2 / 3;
 
     width: 90%;
-    margin: 0 auto;
+    margin: 1.8rem auto 15rem;
+  }
+
+  &__details {
+    grid-area: 2 / 1 / 2 / 3;
+  }
+
+  &__search-button {
+    cursor: pointer;
+
+    position: relative;
+
+    display: block;
+
+    box-sizing: border-box;
+    width: 16px;
+    height: 16px;
+    margin-top: -4px;
+    margin-left: -4px;
+
+    background: none;
+    border: 2px solid var(--pastele-red);
+    border-radius: 100%;
+
+    &::after {
+      content: "";
+
+      position: absolute;
+      top: 10px;
+      left: 12px;
+      transform: rotate(-45deg);
+
+      display: block;
+
+      box-sizing: border-box;
+      width: 2px;
+      height: 8px;
+
+      background: var(--pastele-red);
+      border-radius: 3px;
+    }
   }
 }
