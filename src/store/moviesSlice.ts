@@ -47,7 +47,7 @@ export interface Movie {
 
 export interface MoviesState {
   all: Movie[]
-  single?: Movie
+  single?: Movie | null
 }
 
 const initialState: MoviesState = {
@@ -59,7 +59,7 @@ export const moviesSlice = createSlice({
   initialState,
   reducers: {
     clearSingleMovie: (state) => {
-      state.single = undefined
+      state.single = null
     }
   },
   extraReducers: (builder) => {
