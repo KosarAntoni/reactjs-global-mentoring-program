@@ -1,19 +1,17 @@
 import React, { FC, useEffect, useState } from 'react'
-import { shallowEqual } from 'react-redux'
 import classNames from 'classnames'
-import { SORT_OPTIONS } from 'consts'
+import { GENRES, SORT_OPTIONS } from 'consts'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { fetchMovies, fetchSingleMovie, selectAllMovies } from 'store/moviesSlice'
 
 import GenreSelect from 'components/GenreSelect'
+import { Genre } from 'components/GenreSelect/GenreSelect.models'
 import MovieCard from 'components/MovieCard'
 import MovieDeleteModal from 'components/MovieDeleteModal'
 import MovieEditModal from 'components/MovieEditModal'
 import SortSelect from 'components/SortSelect'
 import { SortOption } from 'components/SortSelect/SortSelect.models'
 import SuccessModal from 'components/SuccessModal'
-
-import { genresMock } from '../../mock'
 
 import { MovieListProps } from './MovieList.models'
 
@@ -28,14 +26,18 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
   const [editableMovieId, setEditableMovieId] = useState<string>('')
 
   const [sortOption, setSortoption] = useState<SortOption>(SORT_OPTIONS[0])
+  const [selectedGenre, setSelectedGenre] = useState(GENRES[0])
 
   const dispatch = useAppDispatch()
-  const movies = useAppSelector(selectAllMovies, shallowEqual)
+  const movies = useAppSelector(selectAllMovies)
 
   useEffect(() => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    dispatch(fetchMovies({ sort: sortOption.id }))
-  }, [sortOption, dispatch])
+    if (selectedGenre === GENRES[0]) {
+      void dispatch(fetchMovies({ sort: sortOption.id }))
+    } else {
+      void dispatch(fetchMovies({ genres: [selectedGenre.id], sort: sortOption.id }))
+    }
+  }, [sortOption, dispatch, selectedGenre])
 
   const handleDeleteClick = (): void => {
     setIsDeleteModalOpen(true)
@@ -51,8 +53,8 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     setEditableMovieId('')
   }
 
-  const handleGenreSelect = (): void => {
-    console.log('genre selected')
+  const handleGenreSelect = (genre: Genre): void => {
+    setSelectedGenre(genre)
   }
 
   const handleSortSelect = (option: SortOption): void => {
@@ -67,7 +69,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     <>
       <div className={classNames('movie-list', className)}>
         <header>
-          <GenreSelect genres={genresMock} handleSelect={handleGenreSelect} selectedGenre={genresMock[0]}/>
+          <GenreSelect genres={GENRES} handleSelect={handleGenreSelect} selectedGenre={selectedGenre}/>
           <SortSelect handleSelect={handleSortSelect} options={SORT_OPTIONS} selectedOption={sortOption}/>
         </header>
 
