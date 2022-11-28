@@ -7,7 +7,7 @@ const LIMIT = 12
 export const fetchMovies = createAsyncThunk(
   'movies/fetchSortedMovies',
   async ({ genres, sort, limit = LIMIT }: { genres?: string[], sort?: 'vote_average' | 'release_date', limit?: number }) => {
-    const response = await fetch(`${URL}/movies?${sort ? `sortBy=${sort}&sortOrder=desc&limit` : ''}${genres ? `filter=${genres.join(',')}&` : ''}limit=${limit}`, {
+    const response = await fetch(`${URL}/movies?${sort ? `sortBy=${sort}&sortOrder=desc&` : ''}${genres ? `filter=${genres.join(',')}&` : ''}limit=${limit}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -59,7 +59,11 @@ const initialState: MoviesState = {
 export const moviesSlice = createSlice({
   name: 'movies',
   initialState,
-  reducers: {},
+  reducers: {
+    clearSingleMovie: (state) => {
+      state.single = undefined
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchMovies.fulfilled, (state, action) => {
@@ -73,5 +77,7 @@ export const moviesSlice = createSlice({
 
 export const selectAllMovies = (state: RootState) => state.movies.all
 export const selectSingleMovie = (state: RootState) => state.movies.single
+
+export const { clearSingleMovie } = moviesSlice.actions
 
 export default moviesSlice.reducer

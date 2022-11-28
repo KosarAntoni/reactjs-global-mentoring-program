@@ -1,7 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
-import { shallowEqual, useDispatch, useSelector } from 'react-redux'
+import { shallowEqual } from 'react-redux'
 import classNames from 'classnames'
-import { AppDispatch } from 'store/index'
+import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { fetchMovies, fetchSingleMovie, selectAllMovies } from 'store/moviesSlice'
 
 import GenreSelect from 'components/GenreSelect'
@@ -36,8 +36,8 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
 
   const [sortOption, setSortoption] = useState<SortOption>(SORT_OPTIONS[0])
 
-  const dispatch = useDispatch<AppDispatch>()
-  const movies = useSelector(selectAllMovies, shallowEqual)
+  const dispatch = useAppDispatch()
+  const movies = useAppSelector(selectAllMovies, shallowEqual)
 
   useEffect(() => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
