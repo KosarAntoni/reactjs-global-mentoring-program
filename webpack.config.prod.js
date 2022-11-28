@@ -56,7 +56,8 @@ module.exports = {
       containers: path.resolve(__dirname, 'src/containers/'),
       templates: path.resolve(__dirname, 'src/templates/'),
       utilities: path.resolve(__dirname, 'src/utilities/'),
-      store: path.resolve(__dirname, 'src/store/')
+      store: path.resolve(__dirname, 'src/store/'),
+      consts: path.resolve(__dirname, 'src/consts')
     }
   },
   plugins: [

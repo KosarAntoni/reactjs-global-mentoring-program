@@ -1,6 +1,7 @@
 import React, { FC, useEffect, useState } from 'react'
 import { shallowEqual } from 'react-redux'
 import classNames from 'classnames'
+import { SORT_OPTIONS } from 'consts'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { fetchMovies, fetchSingleMovie, selectAllMovies } from 'store/moviesSlice'
 
@@ -17,14 +18,6 @@ import { genresMock } from '../../mock'
 import { MovieListProps } from './MovieList.models'
 
 import './MovieList.styles.scss'
-
-const SORT_OPTIONS: SortOption[] = [{
-  id: 'release_date',
-  name: 'Release date'
-}, {
-  id: 'vote_average',
-  name: 'Rate'
-}]
 
 const MovieList: FC<MovieListProps> = ({ className }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)

@@ -1,13 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { API_URL, MOVIES_LIMIT } from 'consts'
 import { RootState } from 'store'
-
-const URL = 'http://localhost:4000'
-const LIMIT = 12
 
 export const fetchMovies = createAsyncThunk(
   'movies/fetchSortedMovies',
-  async ({ genres, sort, limit = LIMIT }: { genres?: string[], sort?: 'vote_average' | 'release_date', limit?: number }) => {
-    const response = await fetch(`${URL}/movies?${sort ? `sortBy=${sort}&sortOrder=desc&` : ''}${genres ? `filter=${genres.join(',')}&` : ''}limit=${limit}`, {
+  async ({ genres, sort, limit = MOVIES_LIMIT }: { genres?: string[], sort?: 'vote_average' | 'release_date', limit?: number }) => {
+    const response = await fetch(`${API_URL}/movies?${sort ? `sortBy=${sort}&sortOrder=desc&` : ''}${genres ? `filter=${genres.join(',')}&` : ''}limit=${limit}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
@@ -21,7 +19,7 @@ export const fetchMovies = createAsyncThunk(
 export const fetchSingleMovie = createAsyncThunk(
   'movies/fetchSingleMovie',
   async (id: number) => {
-    const response = await fetch(`${URL}/movies/${id}`, {
+    const response = await fetch(`${API_URL}/movies/${id}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'

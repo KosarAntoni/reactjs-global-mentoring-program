@@ -18,7 +18,8 @@
       "templates/*": ["templates/*"],
       "styles/*": ["styles/*"],
       "utilities/*": ["utilities/*"],
-      "store/*": ["store/*"]
+      "store/*": ["store/*"],
+      "consts/*": ["consts/*"]
     }
   }
 }
