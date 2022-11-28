@@ -23,7 +23,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
 
   const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false)
   const [isEditSuccessModalOpen, setIsEditSuccessModalOpen] = useState<boolean>(false)
-  const [editableMovieId, setEditableMovieId] = useState<string>('')
+  const [editableMovieId, setEditableMovieId] = useState<number | null>(null)
 
   const [sortOption, setSortoption] = useState<SortOption>(SORT_OPTIONS[0])
   const [selectedGenre, setSelectedGenre] = useState(GENRES[0])
@@ -43,14 +43,14 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     setIsDeleteModalOpen(true)
   }
 
-  const handleEditClick = (id: string): void => {
+  const handleEditClick = (id: number): void => {
     setIsEditModalOpen(true)
     setEditableMovieId(id)
   }
 
   const handleEditSubmit = (): void => {
     setIsEditSuccessModalOpen(true)
-    setEditableMovieId('')
+    setEditableMovieId(null)
   }
 
   const handleGenreSelect = (genre: Genre): void => {
@@ -94,7 +94,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
               onClick={() => handleCardClick(id)}
                 options={
                   <ul>
-                    <li onClick={() => handleEditClick(id.toString())}>Edit</li>
+                    <li onClick={() => handleEditClick(id)}>Edit</li>
                     <li onClick={handleDeleteClick}>Delete</li>
                   </ul>}
               {...{
