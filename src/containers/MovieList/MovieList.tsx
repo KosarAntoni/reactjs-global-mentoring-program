@@ -1,5 +1,8 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
+import { shallowEqual, useDispatch, useSelector } from 'react-redux'
 import classNames from 'classnames'
+import { AppDispatch } from 'store/index'
+import { fetchMovies, fetchSingleMovie, selectAllMovies } from 'store/moviesSlice'
 
 import GenreSelect from 'components/GenreSelect'
 import MovieCard from 'components/MovieCard'
@@ -9,13 +12,21 @@ import SortSelect from 'components/SortSelect'
 import { SortOption } from 'components/SortSelect/SortSelect.models'
 import SuccessModal from 'components/SuccessModal'
 
-import { genresMock, moviesMock, sortOptionsMock } from '../../mock'
+import { genresMock } from '../../mock'
 
 import { MovieListProps } from './MovieList.models'
 
 import './MovieList.styles.scss'
 
-const MovieList: FC<MovieListProps> = ({ className, handleMovieSelect }) => {
+const SORT_OPTIONS: SortOption[] = [{
+  id: 'release_date',
+  name: 'Release date'
+}, {
+  id: 'vote_average',
+  name: 'Rate'
+}]
+
+const MovieList: FC<MovieListProps> = ({ className }) => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [isDeleteSuccessModalOpen, setIsDeleteSuccessModalOpen] = useState<boolean>(false)
 
@@ -23,7 +34,15 @@ const MovieList: FC<MovieListProps> = ({ className, handleMovieSelect }) => {
   const [isEditSuccessModalOpen, setIsEditSuccessModalOpen] = useState<boolean>(false)
   const [editableMovieId, setEditableMovieId] = useState<string>('')
 
-  const [sortOption, setSortoption] = useState<SortOption>(sortOptionsMock[0])
+  const [sortOption, setSortoption] = useState<SortOption>(SORT_OPTIONS[0])
+
+  const dispatch = useDispatch<AppDispatch>()
+  const movies = useSelector(selectAllMovies, shallowEqual)
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    dispatch(fetchMovies({ sort: sortOption.id }))
+  }, [sortOption, dispatch])
 
   const handleDeleteClick = (): void => {
     setIsDeleteModalOpen(true)
@@ -48,8 +67,7 @@ const MovieList: FC<MovieListProps> = ({ className, handleMovieSelect }) => {
   }
 
   const handleCardClick = (id: number): void => {
-    if (!handleMovieSelect) return
-    handleMovieSelect(id)
+    void dispatch(fetchSingleMovie(id))
   }
 
   return (
@@ -57,19 +75,19 @@ const MovieList: FC<MovieListProps> = ({ className, handleMovieSelect }) => {
       <div className={classNames('movie-list', className)}>
         <header>
           <GenreSelect genres={genresMock} handleSelect={handleGenreSelect} selectedGenre={genresMock[0]}/>
-          <SortSelect handleSelect={handleSortSelect} options={sortOptionsMock} selectedOption={sortOption}/>
+          <SortSelect handleSelect={handleSortSelect} options={SORT_OPTIONS} selectedOption={sortOption}/>
         </header>
 
         <p className='movie-list__count'>
           <b>
-            {moviesMock.length}
+            {movies.length}
             {' '}
           </b>
           movies found
         </p>
 
         <div className='movie-list__list'>
-          {moviesMock.slice(0, 6).map(({
+          {movies.map(({
             id,
             genres,
             poster_path: posterPath,
@@ -114,7 +132,7 @@ const MovieList: FC<MovieListProps> = ({ className, handleMovieSelect }) => {
         isOpen={isEditModalOpen}
         movieData={(() => {
           if (!editableMovieId) return
-          const [movie] = moviesMock.filter(({ id }) => id.toString() === editableMovieId.toString())
+          const [movie] = movies.filter(({ id }) => id.toString() === editableMovieId.toString())
 
           return ({
             title: movie.title,
