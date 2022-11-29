@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { GENRES, SORT_OPTIONS } from 'consts'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
-import { fetchMovies, fetchSingleMovie, selectAllMovies } from 'store/moviesSlice'
+import { fetchAllMovies, fetchSingleMovie, selectAllMovies } from 'store/moviesSlice'
 
 import GenreSelect from 'components/GenreSelect'
 import { Genre } from 'components/GenreSelect/GenreSelect.models'
@@ -25,7 +25,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
   const [isEditSuccessModalOpen, setIsEditSuccessModalOpen] = useState<boolean>(false)
   const [editableMovieId, setEditableMovieId] = useState<number | null>(null)
 
-  const [sortOption, setSortoption] = useState<SortOption>(SORT_OPTIONS[0])
+  const [sortOption, setSortOption] = useState<SortOption>(SORT_OPTIONS[0])
   const [selectedGenre, setSelectedGenre] = useState(GENRES[0])
 
   const dispatch = useAppDispatch()
@@ -33,9 +33,9 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
 
   useEffect(() => {
     if (selectedGenre === GENRES[0]) {
-      void dispatch(fetchMovies({ sort: sortOption.id }))
+      void dispatch(fetchAllMovies({ sort: sortOption.id }))
     } else {
-      void dispatch(fetchMovies({ genres: [selectedGenre.id], sort: sortOption.id }))
+      void dispatch(fetchAllMovies({ genres: [selectedGenre.id], sort: sortOption.id }))
     }
   }, [sortOption, dispatch, selectedGenre])
 
@@ -58,7 +58,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
   }
 
   const handleSortSelect = (option: SortOption): void => {
-    setSortoption(option)
+    setSortOption(option)
   }
 
   const handleCardClick = (id: number): void => {

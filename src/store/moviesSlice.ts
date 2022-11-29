@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 import { API_URL, MOVIES_LIMIT } from 'consts'
 import { RootState } from 'store'
 
-export const fetchMovies = createAsyncThunk(
+export const fetchAllMovies = createAsyncThunk(
   'movies/fetchSortedMovies',
   async ({ genres, sort, limit = MOVIES_LIMIT }: { genres?: string[], sort?: 'vote_average' | 'release_date', limit?: number }) => {
     const response = await fetch(`${API_URL}/movies?${sort ? `sortBy=${sort}&sortOrder=desc&` : ''}${genres ? `filter=${genres.join(',')}&` : ''}limit=${limit}`, {
@@ -64,7 +64,7 @@ export const moviesSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(fetchMovies.fulfilled, (state, action) => {
+      .addCase(fetchAllMovies.fulfilled, (state, action) => {
         state.all = action.payload
       })
       .addCase(fetchSingleMovie.fulfilled, (state, action) => {
