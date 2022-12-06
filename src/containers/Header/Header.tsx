@@ -1,7 +1,7 @@
 import React, { FC, useState } from 'react'
 import background from 'assets/header-background.png'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
-import { clearSingleMovie, selectSingleMovie } from 'store/moviesSlice'
+import { addMovie, clearSingleMovie, selectSingleMovie } from 'store/moviesSlice'
 
 import Button from 'components/Button'
 import Logo from 'components/Logo'
@@ -20,10 +20,9 @@ const Header: FC = () => {
 
   const movie = useAppSelector(selectSingleMovie)
 
-  const handleCreateCourse = (data: any): void => {
+  const handleAddMovie = (data: any): void => {
+    void dispatch(addMovie(data))
     setIsAddSuccessModalOpen(true)
-    console.log(data)
-    console.log('Create course')
   }
 
   const handleSearchButtonClick = () => {
@@ -33,14 +32,14 @@ const Header: FC = () => {
   return (
     <>
       <header className='header'>
-        <Logo/>
+        <Logo />
 
         {movie
-          ? <button className='header__search-button' onClick={handleSearchButtonClick} type='button'/>
+          ? <button className='header__search-button' onClick={handleSearchButtonClick} type='button' />
           : <Button onClick={() => setIsAddModalOpen(true)} style='transparent'>+ add movie</Button>}
 
         {movie
-          ? <MovieDetails {...movie} className='header__movie-details'/>
+          ? <MovieDetails {...movie} className='header__movie-details' />
           : (
             <>
               <img
@@ -49,7 +48,7 @@ const Header: FC = () => {
                 src={background}
               />
 
-              <Search className='header__search'/>
+              <Search className='header__search' />
             </>
             )
         }
@@ -58,8 +57,8 @@ const Header: FC = () => {
 
       <MovieEditModal
         handleClose={() => setIsAddModalOpen(false)}
-        handleSubmit={handleCreateCourse}
-        heading={'Add course'}
+        handleSubmit={handleAddMovie}
+        heading={'Add movie'}
         isOpen={isAddModalOpen}
       />
 

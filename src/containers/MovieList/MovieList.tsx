@@ -78,8 +78,8 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     <>
       <div className={classNames('movie-list', className)}>
         <header>
-          <GenreSelect genres={GENRES} handleSelect={handleGenreSelect} selectedGenre={selectedGenre}/>
-          <SortSelect handleSelect={handleSortSelect} options={SORT_OPTIONS} selectedOption={sortOption}/>
+          <GenreSelect genres={GENRES} handleSelect={handleGenreSelect} selectedGenre={selectedGenre} />
+          <SortSelect handleSelect={handleSortSelect} options={SORT_OPTIONS} selectedOption={sortOption} />
         </header>
 
         <p className='movie-list__count'>
@@ -101,11 +101,11 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
             <MovieCard
               key={id}
               onClick={() => handleCardClick(id)}
-                options={
-                  <ul>
-                    <li onClick={() => handleEditClick(id)}>Edit</li>
-                    <li onClick={() => handleDeleteClick(id)}>Delete</li>
-                  </ul>}
+              options={
+                <ul>
+                  <li onClick={() => handleEditClick(id)}>Edit</li>
+                  <li onClick={() => handleDeleteClick(id)}>Delete</li>
+                </ul>}
               {...{
                 title,
                 genres,
@@ -141,11 +141,11 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
           return ({
             title: movie.title,
             vote_average: movie.vote_average,
-            release_date: new Date(movie.release_date),
-            url: '',
+            release_date: movie.release_date,
+            poster_path: '',
             overview: movie.overview,
             genres: movie.genres,
-            runtime: '00:00'
+            runtime: movie.runtime
           })
         })()}
       />
