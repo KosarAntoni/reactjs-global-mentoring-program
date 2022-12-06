@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { GENRES, SORT_OPTIONS } from 'consts'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
-import { fetchAllMovies, fetchSingleMovie, selectAllMovies } from 'store/moviesSlice'
+import { deleteMovie, fetchAllMovies, fetchSingleMovie, selectAllMovies } from 'store/moviesSlice'
 
 import GenreSelect from 'components/GenreSelect'
 import { Genre } from 'components/GenreSelect/GenreSelect.models'
@@ -37,10 +37,11 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     } else {
       void dispatch(fetchAllMovies({ genres: [selectedGenre.id], sort: sortOption.id }))
     }
-  }, [sortOption, dispatch, selectedGenre])
+  }, [sortOption, dispatch, selectedGenre, editableMovieId])
 
-  const handleDeleteClick = (): void => {
+  const handleDeleteClick = (id: number): void => {
     setIsDeleteModalOpen(true)
+    setEditableMovieId(id)
   }
 
   const handleEditClick = (id: number): void => {
@@ -50,6 +51,14 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
 
   const handleEditSubmit = (): void => {
     setIsEditSuccessModalOpen(true)
+    setEditableMovieId(null)
+  }
+
+  const handleDeleteSubmit = () => {
+    if (!editableMovieId) return
+
+    void dispatch(deleteMovie(editableMovieId))
+    setIsDeleteSuccessModalOpen(true)
     setEditableMovieId(null)
   }
 
@@ -95,7 +104,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
                 options={
                   <ul>
                     <li onClick={() => handleEditClick(id)}>Edit</li>
-                    <li onClick={handleDeleteClick}>Delete</li>
+                    <li onClick={() => handleDeleteClick(id)}>Delete</li>
                   </ul>}
               {...{
                 title,
@@ -110,7 +119,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
 
       <MovieDeleteModal
         handleClose={() => setIsDeleteModalOpen(false)}
-        handleConfirm={() => setIsDeleteSuccessModalOpen(true)}
+        handleSubmit={handleDeleteSubmit}
         isOpen={isDeleteModalOpen}
       />
 

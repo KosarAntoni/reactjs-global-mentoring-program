@@ -30,6 +30,20 @@ export const fetchSingleMovie = createAsyncThunk(
   }
 )
 
+export const deleteMovie = createAsyncThunk(
+  'movies/fetchSingleMovie',
+  async (id: number) => {
+    const response = await fetch(`${API_URL}/movies/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await response.json()
+    return data
+  }
+)
+
 export interface Movie {
   id: number
   title: string
