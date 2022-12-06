@@ -1,5 +1,7 @@
 import React, { FC, useState } from 'react'
 import background from 'assets/header-background.png'
+import { useAppDispatch, useAppSelector } from 'store/hooks'
+import { clearSingleMovie, selectSingleMovie } from 'store/moviesSlice'
 
 import Button from 'components/Button'
 import Logo from 'components/Logo'
@@ -8,18 +10,24 @@ import MovieEditModal from 'components/MovieEditModal'
 import Search from 'components/Search'
 import SuccessModal from 'components/SuccessModal'
 
-import { HeaderProps } from './Header.models'
-
 import './Header.styles.scss'
 
-const Header: FC<HeaderProps> = ({ movie, handleDetailsClose }) => {
+const Header: FC = () => {
+  const dispatch = useAppDispatch()
+
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
   const [isAddSuccessModalOpen, setIsAddSuccessModalOpen] = useState<boolean>(false)
+
+  const movie = useAppSelector(selectSingleMovie)
 
   const handleCreateCourse = (data: any): void => {
     setIsAddSuccessModalOpen(true)
     console.log(data)
     console.log('Create course')
+  }
+
+  const handleSearchButtonClick = () => {
+    dispatch(clearSingleMovie())
   }
 
   return (
@@ -28,7 +36,7 @@ const Header: FC<HeaderProps> = ({ movie, handleDetailsClose }) => {
         <Logo/>
 
         {movie
-          ? <button className='header__search-button' onClick={handleDetailsClose} type='button'/>
+          ? <button className='header__search-button' onClick={handleSearchButtonClick} type='button'/>
           : <Button onClick={() => setIsAddModalOpen(true)} style='transparent'>+ add movie</Button>}
 
         {movie

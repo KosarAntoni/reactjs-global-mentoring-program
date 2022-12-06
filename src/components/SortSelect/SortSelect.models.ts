@@ -1,4 +1,7 @@
-export type SortOption = Record<'id' | 'name', string>
+export interface SortOption {
+  id: 'release_date' | 'vote_average'
+  name: 'Release date' | 'Rate'
+}
 
 export interface SortSelectProps {
   className?: string
