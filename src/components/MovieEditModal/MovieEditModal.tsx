@@ -1,7 +1,7 @@
 import React, { FC } from 'react'
 import { GENRES } from 'consts/index'
 import { Field, FieldProps, Form, Formik } from 'formik'
-import { timeToNumber } from 'utilities'
+import { numberToFormTime, timeToNumber } from 'utilities'
 
 import Button from 'components/Button'
 import CheckboxField from 'components/CheckboxField'
@@ -27,24 +27,19 @@ const initialState = {
 const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSubmit, heading, movieData }) => {
   const handleFormSubmit = (values: any, actions: { setSubmitting: (arg0: boolean) => void }): void => {
     handleClose()
-    const data = { ...values, runtime: timeToNumber(values.runtime) }
-    console.log(data)
+    const data = { ...values, runtime: values.runtime && timeToNumber(values.runtime) }
     handleSubmit(data)
     actions.setSubmitting(false)
   }
 
-  // const handleDateInputChange = (event: ChangeEvent<HTMLInputElement>, key: string): void =>
-  //   setFormData((prevState) => {
-  //     return ({
-  //       ...prevState,
-  //       [key]: new Date(event.target.value)
-  //     })
-  //   })
+  const initialValues = movieData
+    ? { ...movieData, runtime: movieData.runtime && numberToFormTime(movieData.runtime) }
+    : initialState
 
   return (
     <Modal {...{ isOpen, handleClose }}>
       <Formik
-        initialValues={initialState} onSubmit={handleFormSubmit}>
+        initialValues={initialValues} onSubmit={handleFormSubmit}>
         <Form className='movie-edit-modal' >
           <h2>
             {heading}

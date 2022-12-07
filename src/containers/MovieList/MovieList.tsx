@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { GENRES, SORT_OPTIONS } from 'consts'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
-import { deleteMovie, fetchAllMovies, fetchSingleMovie, selectAllMovies } from 'store/moviesSlice'
+import { deleteMovie, editMovie, fetchAllMovies, fetchSingleMovie, Movie, selectAllMovies } from 'store/moviesSlice'
 
 import GenreSelect from 'components/GenreSelect'
 import { Genre } from 'components/GenreSelect/GenreSelect.models'
@@ -49,8 +49,11 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     setEditableMovieId(id)
   }
 
-  const handleEditSubmit = (): void => {
+  const handleEditSubmit = (body: Partial<Movie>): void => {
+    if (!editableMovieId) return
+
     setIsEditSuccessModalOpen(true)
+    void dispatch(editMovie({ ...body, id: editableMovieId } as unknown as Movie))
     setEditableMovieId(null)
   }
 
@@ -142,7 +145,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
             title: movie.title,
             vote_average: movie.vote_average,
             release_date: movie.release_date,
-            poster_path: '',
+            poster_path: movie.poster_path,
             overview: movie.overview,
             genres: movie.genres,
             runtime: movie.runtime

@@ -59,6 +59,21 @@ export const addMovie = createAsyncThunk(
   }
 )
 
+export const editMovie = createAsyncThunk(
+  'movies/addMovie',
+  async (body: Movie) => {
+    const response = await fetch(`${API_URL}/movies`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+    const data = await response.json()
+    return data
+  }
+)
+
 export interface Movie {
   id: number
   title: string
