@@ -77,117 +77,126 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
         validationSchema={MovieSchema}
       >
         {({
-          values
-        }) => (
-          <Form className='movie-edit-modal' >
-            <h2>
-              {heading}
-            </h2>
+          values,
+          errors
+        }) => {
+          return (
+            <Form className='movie-edit-modal' >
+              <h2>
+                {heading}
+              </h2>
 
-            <Field name='title'>
-              {({ field, meta }: FieldProps) => (
-                <InputField
-                  className='movie-edit-modal__title'
-                  error={meta.touched && meta.error ? meta.error : undefined}
-                  id='title'
-                  label={'TITLE'}
-                  type='text'
-                  {...field} />
-              )}
-            </Field>
-
-            <Field name='release_date'>
-              {({ field, meta }: FieldProps) => (
-                <InputField
-                  className='movie-edit-modal__release-date'
-                  error={meta.touched && meta.error ? meta.error : undefined}
-                  id='release_date'
-                  label={'RELEASE DATE'}
-                  type='date'
-                  {...field} />
-              )}
-            </Field>
-
-            <Field name='poster_path'>
-              {({ field, meta }: FieldProps) => (
-                <InputField
-                  className='movie-edit__poster-path'
-                  error={meta.touched && meta.error ? meta.error : undefined}
-                  id='poster_path'
-                  label={'POSTER PATH'}
-                  type='url'
-                  {...field} />
-              )}
-            </Field>
-
-            <Field name='vote_average'>
-              {({ field, meta }: FieldProps) => {
-                return (
+              <Field name='title'>
+                {({ field, meta }: FieldProps) => (
                   <InputField
-                    className='movie-edit-modal__rating'
+                    className='movie-edit-modal__title'
                     error={meta.touched && meta.error ? meta.error : undefined}
-                    id='vote_average'
-                    label={'RATING'}
-                    max={10}
-                    min={0}
-                    step='0.1'
-                    type='number'
+                    id='title'
+                    label={'TITLE'}
+                    type='text'
                     {...field} />
-                )
-              }}
-            </Field>
+                )}
+              </Field>
 
-            <div className='movie-edit-modal__genres'>
-              <span>Genre</span>
+              <Field name='release_date'>
+                {({ field, meta }: FieldProps) => (
+                  <InputField
+                    className='movie-edit-modal__release-date'
+                    error={meta.touched && meta.error ? meta.error : undefined}
+                    id='release_date'
+                    label={'RELEASE DATE'}
+                    type='date'
+                    {...field} />
+                )}
+              </Field>
 
-              <Dropdown toggle={values.genres?.join(', ') || 'Select Genre'}>
-                <ul role='group'>
-                  {Array.from(genres).filter((genre) => genre.toLowerCase() !== 'all').map((genre) => (
-                    <li key={genre}>
-                      <Field
-                        as={CheckboxField}
-                        id={genre}
-                        label={genre}
-                        name='genres'
-                        type='checkbox'
-                        value={genre}>
-                      </Field>
-                    </li>
-                  ))}
-                </ul>
-              </Dropdown>
-            </div>
+              <Field name='poster_path'>
+                {({ field, meta }: FieldProps) => (
+                  <InputField
+                    className='movie-edit__poster-path'
+                    error={meta.touched && meta.error ? meta.error : undefined}
+                    id='poster_path'
+                    label={'POSTER PATH'}
+                    type='url'
+                    {...field} />
+                )}
+              </Field>
 
-            <Field name='runtime'>
-              {({ field, meta }: FieldProps) => (
-                <InputField
-                  className='movie-edit-modal__runtime'
-                  error={meta.touched && meta.error ? meta.error : undefined}
-                  id='runtime'
-                  label={'runtime'}
-                  type='time'
-                  {...field} />
-              )}
-            </Field>
+              <Field name='vote_average'>
+                {({ field, meta }: FieldProps) => {
+                  return (
+                    <InputField
+                      className='movie-edit-modal__rating'
+                      error={meta.touched && meta.error ? meta.error : undefined}
+                      id='vote_average'
+                      label={'RATING'}
+                      max={10}
+                      min={0}
+                      step='0.1'
+                      type='number'
+                      {...field} />
+                  )
+                }}
+              </Field>
 
-            <Field name='overview'>
-              {({ field, meta }: FieldProps) => (
-                <TextareaField
-                  className='movie-edit-modal__overview'
-                  error={meta.touched && meta.error ? meta.error : undefined}
-                  id='overview'
-                  label={'overview'}
-                  rows={7}
-                  {...field} />
-              )}
-            </Field>
+              <div className='movie-edit-modal__genres'>
+                <span>Genre</span>
 
-            <footer>
-              <Button style='outline' type='reset'>Reset</Button>
-              <Button type='submit'>Submit</Button>
-            </footer>
-          </Form>
-        )}
+                <Dropdown toggle={values.genres?.join(', ') || 'Select Genre'}>
+                  <ul role='group'>
+                    {Array.from(genres).filter((genre) => genre.toLowerCase() !== 'all').map((genre) => (
+                      <li key={genre}>
+                        <Field
+                          as={CheckboxField}
+                          id={genre}
+                          label={genre}
+                          name='genres'
+                          type='checkbox'
+                          value={genre}>
+                        </Field>
+                      </li>
+                    ))}
+                  </ul>
+                </Dropdown>
+
+                {errors.genres && (
+                  <span>
+                    {errors.genres}
+                  </span>
+                )}
+              </div>
+
+              <Field name='runtime'>
+                {({ field, meta }: FieldProps) => (
+                  <InputField
+                    className='movie-edit-modal__runtime'
+                    error={meta.touched && meta.error ? meta.error : undefined}
+                    id='runtime'
+                    label={'runtime'}
+                    type='time'
+                    {...field} />
+                )}
+              </Field>
+
+              <Field name='overview'>
+                {({ field, meta }: FieldProps) => (
+                  <TextareaField
+                    className='movie-edit-modal__overview'
+                    error={meta.touched && meta.error ? meta.error : undefined}
+                    id='overview'
+                    label={'overview'}
+                    rows={7}
+                    {...field} />
+                )}
+              </Field>
+
+              <footer>
+                <Button style='outline' type='reset'>Reset</Button>
+                <Button type='submit'>Submit</Button>
+              </footer>
+            </Form>
+          )
+        }}
       </Formik>
 
     </Modal>
