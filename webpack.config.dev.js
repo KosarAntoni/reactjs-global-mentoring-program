@@ -14,7 +14,8 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist')
     },
-    hot: true
+    hot: true,
+    historyApiFallback: true
   },
   module: {
     rules: [
@@ -43,11 +44,7 @@ module.exports = {
       },
       {
         test: /\.s[ac]ss$/i,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]
+        use: ['style-loader', 'css-loader', 'sass-loader']
       },
       {
         test: /\.css$/i,
