@@ -3,6 +3,7 @@ import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import background from 'assets/header-background.png'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { addMovie, clearSingleMovie, fetchSingleMovie, selectSingleMovie } from 'store/moviesSlice'
+import { removeFromParams } from 'utilities'
 
 import Button from 'components/Button'
 import Logo from 'components/Logo'
@@ -31,7 +32,7 @@ const Header: FC = () => {
 
   const handleSearchButtonClick = () => {
     dispatch(clearSingleMovie())
-    setSearchParams()
+    setSearchParams(removeFromParams(searchParams, 'movie'))
   }
 
   const handleSearchSubmit = (value: string) => {
@@ -40,7 +41,9 @@ const Header: FC = () => {
 
   useEffect(() => {
     const id = searchParams.get('movie')
-    if (id) void dispatch(fetchSingleMovie(+id))
+    if (id) { void dispatch(fetchSingleMovie(+id)) } else {
+      dispatch(clearSingleMovie())
+    }
   }, [dispatch, searchParams])
 
   return (
