@@ -20,7 +20,7 @@ import './MovieList.styles.scss'
 
 const MovieList: FC<MovieListProps> = ({ className }) => {
   const { searchQuery } = useParams()
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
   const [searchParams, setSearchParams] = useSearchParams()
   const dispatch = useAppDispatch()
   const movies = useAppSelector(selectAllMovies)
@@ -36,12 +36,19 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
   const [selectedGenre, setSelectedGenre] = useState(GENRES[0])
 
   useEffect(() => {
-    if (selectedGenre === GENRES[0]) {
-      void dispatch(fetchAllMovies({ sort: sortOption.id, search: searchQuery }))
-    } else {
-      void dispatch(fetchAllMovies({ genres: [selectedGenre.id], search: searchQuery, sort: sortOption.id }))
+    const sortById = searchParams.get('sortBy') as 'vote_average' | 'release_date' | undefined
+    if (sortById) {
+      const option = SORT_OPTIONS.find(({ id }) => id === sortById)
+
+      setSortOption(option || SORT_OPTIONS[0])
     }
-  }, [sortOption, dispatch, selectedGenre, editableMovieId, searchQuery])
+
+    if (selectedGenre === GENRES[0]) {
+      void dispatch(fetchAllMovies({ sort: sortById, search: searchQuery }))
+    } else {
+      void dispatch(fetchAllMovies({ genres: [selectedGenre.id], search: searchQuery, sort: sortById }))
+    }
+  }, [sortOption, dispatch, selectedGenre, editableMovieId, searchQuery, searchParams])
 
   const handleDeleteClick = (id: number): void => {
     setIsDeleteModalOpen(true)
@@ -74,7 +81,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
   }
 
   const handleSortSelect = (option: SortOption): void => {
-    setSortOption(option)
+    setSearchParams({ sortBy: option.id })
   }
 
   const handleCardClick = (id: number): void => {
