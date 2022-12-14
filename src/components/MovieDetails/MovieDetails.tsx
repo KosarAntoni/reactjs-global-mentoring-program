@@ -1,7 +1,6 @@
 import React, { FC } from 'react'
 import classNames from 'classnames'
-import { formatGenres } from 'utilities/formatGenres'
-import { formatTime } from 'utilities/formatTime'
+import { formatGenres, numberToTime } from 'utilities'
 
 import { MovieDetailsProps } from './MovieDetails.models'
 
@@ -44,7 +43,7 @@ const MovieDetails: FC<MovieDetailsProps> = ({
           </span>
 
           <span>
-            {formatTime(runtime)}
+            {numberToTime(runtime)}
           </span>
         </div>
 

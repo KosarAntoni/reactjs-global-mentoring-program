@@ -30,6 +30,50 @@ export const fetchSingleMovie = createAsyncThunk(
   }
 )
 
+export const deleteMovie = createAsyncThunk(
+  'movies/deleteMovie',
+  async (id: number) => {
+    const response = await fetch(`${API_URL}/movies/${id}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    const data = await response.json()
+    return data
+  }
+)
+
+export const addMovie = createAsyncThunk(
+  'movies/addMovie',
+  async (body: Movie) => {
+    const response = await fetch(`${API_URL}/movies`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+    const data = await response.json()
+    return data
+  }
+)
+
+export const editMovie = createAsyncThunk(
+  'movies/addMovie',
+  async (body: Movie) => {
+    const response = await fetch(`${API_URL}/movies`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(body)
+    })
+    const data = await response.json()
+    return data
+  }
+)
+
 export interface Movie {
   id: number
   title: string

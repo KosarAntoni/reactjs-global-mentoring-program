@@ -3,9 +3,11 @@
     "@reduxjs/toolkit": "^1.9.0",
     "dotenv": "^16.0.3",
     "dotenv-webpack": "^8.0.1",
+    "formik": "^2.2.9",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-redux": "^8.0.5"
+    "react-redux": "^8.0.5",
+    "yup": "^0.32.11"
   },
   "scripts": {
     "start": "webpack serve",

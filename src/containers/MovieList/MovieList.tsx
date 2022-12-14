@@ -2,7 +2,7 @@ import React, { FC, useEffect, useState } from 'react'
 import classNames from 'classnames'
 import { GENRES, SORT_OPTIONS } from 'consts'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
-import { fetchAllMovies, fetchSingleMovie, selectAllMovies } from 'store/moviesSlice'
+import { deleteMovie, editMovie, fetchAllMovies, fetchSingleMovie, Movie, selectAllMovies } from 'store/moviesSlice'
 
 import GenreSelect from 'components/GenreSelect'
 import { Genre } from 'components/GenreSelect/GenreSelect.models'
@@ -37,10 +37,11 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     } else {
       void dispatch(fetchAllMovies({ genres: [selectedGenre.id], sort: sortOption.id }))
     }
-  }, [sortOption, dispatch, selectedGenre])
+  }, [sortOption, dispatch, selectedGenre, editableMovieId])
 
-  const handleDeleteClick = (): void => {
+  const handleDeleteClick = (id: number): void => {
     setIsDeleteModalOpen(true)
+    setEditableMovieId(id)
   }
 
   const handleEditClick = (id: number): void => {
@@ -48,8 +49,19 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     setEditableMovieId(id)
   }
 
-  const handleEditSubmit = (): void => {
+  const handleEditSubmit = (body: Partial<Movie>): void => {
+    if (!editableMovieId) return
+
     setIsEditSuccessModalOpen(true)
+    void dispatch(editMovie({ ...body, id: editableMovieId } as unknown as Movie))
+    setEditableMovieId(null)
+  }
+
+  const handleDeleteSubmit = () => {
+    if (!editableMovieId) return
+
+    void dispatch(deleteMovie(editableMovieId))
+    setIsDeleteSuccessModalOpen(true)
     setEditableMovieId(null)
   }
 
@@ -69,8 +81,8 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     <>
       <div className={classNames('movie-list', className)}>
         <header>
-          <GenreSelect genres={GENRES} handleSelect={handleGenreSelect} selectedGenre={selectedGenre}/>
-          <SortSelect handleSelect={handleSortSelect} options={SORT_OPTIONS} selectedOption={sortOption}/>
+          <GenreSelect genres={GENRES} handleSelect={handleGenreSelect} selectedGenre={selectedGenre} />
+          <SortSelect handleSelect={handleSortSelect} options={SORT_OPTIONS} selectedOption={sortOption} />
         </header>
 
         <p className='movie-list__count'>
@@ -92,11 +104,11 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
             <MovieCard
               key={id}
               onClick={() => handleCardClick(id)}
-                options={
-                  <ul>
-                    <li onClick={() => handleEditClick(id)}>Edit</li>
-                    <li onClick={handleDeleteClick}>Delete</li>
-                  </ul>}
+              options={
+                <ul>
+                  <li onClick={() => handleEditClick(id)}>Edit</li>
+                  <li onClick={() => handleDeleteClick(id)}>Delete</li>
+                </ul>}
               {...{
                 title,
                 genres,
@@ -110,7 +122,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
 
       <MovieDeleteModal
         handleClose={() => setIsDeleteModalOpen(false)}
-        handleConfirm={() => setIsDeleteSuccessModalOpen(true)}
+        handleSubmit={handleDeleteSubmit}
         isOpen={isDeleteModalOpen}
       />
 
@@ -132,11 +144,11 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
           return ({
             title: movie.title,
             vote_average: movie.vote_average,
-            release_date: new Date(movie.release_date),
-            url: '',
+            release_date: movie.release_date,
+            poster_path: movie.poster_path,
             overview: movie.overview,
             genres: movie.genres,
-            runtime: '00:00'
+            runtime: movie.runtime
           })
         })()}
       />
