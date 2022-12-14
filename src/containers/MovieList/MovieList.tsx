@@ -1,9 +1,9 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
 import { GENRES, SORT_OPTIONS } from 'consts'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
-import { deleteMovie, editMovie, fetchAllMovies, fetchSingleMovie, Movie, selectAllMovies } from 'store/moviesSlice'
+import { deleteMovie, editMovie, fetchAllMovies, Movie, selectAllMovies } from 'store/moviesSlice'
 
 import GenreSelect from 'components/GenreSelect'
 import { Genre } from 'components/GenreSelect/GenreSelect.models'
@@ -19,6 +19,12 @@ import { MovieListProps } from './MovieList.models'
 import './MovieList.styles.scss'
 
 const MovieList: FC<MovieListProps> = ({ className }) => {
+  const { searchQuery } = useParams()
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [searchParams, setSearchParams] = useSearchParams()
+  const dispatch = useAppDispatch()
+  const movies = useAppSelector(selectAllMovies)
+
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [isDeleteSuccessModalOpen, setIsDeleteSuccessModalOpen] = useState<boolean>(false)
 
@@ -28,11 +34,6 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
 
   const [sortOption, setSortOption] = useState<SortOption>(SORT_OPTIONS[0])
   const [selectedGenre, setSelectedGenre] = useState(GENRES[0])
-
-  const { searchQuery } = useParams()
-
-  const dispatch = useAppDispatch()
-  const movies = useAppSelector(selectAllMovies)
 
   useEffect(() => {
     if (selectedGenre === GENRES[0]) {
@@ -77,7 +78,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
   }
 
   const handleCardClick = (id: number): void => {
-    void dispatch(fetchSingleMovie(id))
+    setSearchParams({ movie: id.toString() })
   }
 
   return (

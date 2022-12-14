@@ -13,18 +13,15 @@ const router = createBrowserRouter([
     errorElement: <NotFound />
 
   },
-
   {
     path: '/search',
     element: <Layout />,
     children: [
       {
-        path: '/search/:searchQuery',
-        element: <h2>im nested</h2>
+        path: '/search/:searchQuery'
       }
     ]
   }
-
 ])
 
 const App: FC = () => {
