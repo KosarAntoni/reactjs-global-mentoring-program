@@ -1,4 +1,5 @@
 import React, { FC, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import background from 'assets/header-background.png'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { addMovie, clearSingleMovie, selectSingleMovie } from 'store/moviesSlice'
@@ -14,6 +15,8 @@ import './Header.styles.scss'
 
 const Header: FC = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const { searchQuery } = useParams()
 
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
   const [isAddSuccessModalOpen, setIsAddSuccessModalOpen] = useState<boolean>(false)
@@ -27,6 +30,10 @@ const Header: FC = () => {
 
   const handleSearchButtonClick = () => {
     dispatch(clearSingleMovie())
+  }
+
+  const handleSearchSubmit = (value: string) => {
+    navigate(`/search/${value}`)
   }
 
   return (
@@ -48,10 +55,9 @@ const Header: FC = () => {
                 src={background}
               />
 
-              <Search className='header__search' />
+              <Search className='header__search' defaultValue={searchQuery} handleSearchSubmit={handleSearchSubmit} />
             </>
-            )
-        }
+          )}
 
       </header>
 

@@ -1,4 +1,5 @@
 import React, { FC, useEffect, useState } from 'react'
+import { useParams } from 'react-router-dom'
 import classNames from 'classnames'
 import { GENRES, SORT_OPTIONS } from 'consts'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
@@ -28,16 +29,18 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
   const [sortOption, setSortOption] = useState<SortOption>(SORT_OPTIONS[0])
   const [selectedGenre, setSelectedGenre] = useState(GENRES[0])
 
+  const { searchQuery } = useParams()
+
   const dispatch = useAppDispatch()
   const movies = useAppSelector(selectAllMovies)
 
   useEffect(() => {
     if (selectedGenre === GENRES[0]) {
-      void dispatch(fetchAllMovies({ sort: sortOption.id }))
+      void dispatch(fetchAllMovies({ sort: sortOption.id, search: searchQuery }))
     } else {
-      void dispatch(fetchAllMovies({ genres: [selectedGenre.id], sort: sortOption.id }))
+      void dispatch(fetchAllMovies({ genres: [selectedGenre.id], search: searchQuery, sort: sortOption.id }))
     }
-  }, [sortOption, dispatch, selectedGenre, editableMovieId])
+  }, [sortOption, dispatch, selectedGenre, editableMovieId, searchQuery])
 
   const handleDeleteClick = (id: number): void => {
     setIsDeleteModalOpen(true)

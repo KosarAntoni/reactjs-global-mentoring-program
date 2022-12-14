@@ -8,21 +8,37 @@ import { SearchProps } from './Search.models'
 
 import './Search.styles.scss'
 
-const Search: FC<SearchProps> = ({ className }) => (
-  <div className={classNames('search', className)}>
-    <h1 className='search__heading'>FIND YOUR MOViE</h1>
+const Search: FC<SearchProps> = ({ className, handleSearchSubmit, defaultValue }) => {
+  const handleSubmit = (event: React.SyntheticEvent) => {
+    event.preventDefault()
+    if (!handleSearchSubmit) return
 
-    <Input
+    const target = event.target as typeof event.target & {
+      search: { value: string }
+    }
+    handleSearchSubmit(target.search.value)
+  }
+
+  return (
+    <form className={classNames('search', className)} onSubmit={handleSubmit}>
+      <h1 className='search__heading'>FIND YOUR MOViE</h1>
+
+      <Input
         className='search__input'
+        defaultValue={defaultValue || ''}
+        name='search'
         placeholder='What do you want to watch?'
-    />
 
-    <Button
+      />
+
+      <Button
         className='search__button'
-    >
-      Search
-    </Button>
-  </div>
-)
+        type='submit'
+      >
+        Search
+      </Button>
+    </form>
+  )
+}
 
 export default Search

@@ -9,16 +9,22 @@ import './App.styles.scss'
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Navigate to='/search' />
+    element: <Navigate to='/search' />,
+    errorElement: <NotFound />
+
   },
+
   {
     path: '/search',
-    element: <Layout />
-  },
-  {
-    path: '*',
-    element: <NotFound />
+    element: <Layout />,
+    children: [
+      {
+        path: '/search/:searchQuery',
+        element: <h2>im nested</h2>
+      }
+    ]
   }
+
 ])
 
 const App: FC = () => {

@@ -21,8 +21,9 @@ module.exports = {
   rules: {
     '@typescript-eslint/explicit-function-return-type': 0,
     '@typescript-eslint/prefer-nullish-coalescing': 0,
-    'jsx-quotes': [2, 'prefer-single'],
     '@typescript-eslint/strict-boolean-expressions': 0,
+    '@typescript-eslint/indent': 0,
+    'jsx-quotes': [2, 'prefer-single'],
     'no-console': 1,
     'react/jsx-newline': [2, { prevent: true, allowMultilines: true }],
     'react/jsx-first-prop-new-line': [2, 'multiline'],

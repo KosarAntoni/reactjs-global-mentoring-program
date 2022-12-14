@@ -4,8 +4,16 @@ import { RootState } from 'store'
 
 export const fetchAllMovies = createAsyncThunk(
   'movies/fetchSortedMovies',
-  async ({ genres, sort, limit = MOVIES_LIMIT }: { genres?: string[], sort?: 'vote_average' | 'release_date', limit?: number }) => {
-    const response = await fetch(`${API_URL}/movies?${sort ? `sortBy=${sort}&sortOrder=desc&` : ''}${genres ? `filter=${genres.join(',')}&` : ''}limit=${limit}`, {
+  async ({ genres, sort, search, limit = MOVIES_LIMIT }: { genres?: string[], sort?: 'vote_average' | 'release_date', search?: string, limit?: number }) => {
+    const url = [
+      `${API_URL}/movies?`,
+      `${search ? `search=${search}&searchBy=title&` : ''}`,
+      `${sort ? `sortBy=${sort}&sortOrder=desc&` : ''}`,
+      `${genres ? `filter=${genres.join(',')}&` : ''}`,
+      `limit=${limit}`
+    ].join('')
+
+    const response = await fetch(url, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
