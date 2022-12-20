@@ -1,8 +1,10 @@
 import React, { FC, useEffect, useState } from 'react'
+import { useParams, useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
 import { GENRES, SORT_OPTIONS } from 'consts'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
-import { deleteMovie, editMovie, fetchAllMovies, fetchSingleMovie, Movie, selectAllMovies } from 'store/moviesSlice'
+import { deleteMovie, editMovie, fetchAllMovies, Movie, selectAllMovies } from 'store/moviesSlice'
+import { appendToParams, removeFromParams } from 'utilities'
 
 import GenreSelect from 'components/GenreSelect'
 import { Genre } from 'components/GenreSelect/GenreSelect.models'
@@ -18,6 +20,12 @@ import { MovieListProps } from './MovieList.models'
 import './MovieList.styles.scss'
 
 const MovieList: FC<MovieListProps> = ({ className }) => {
+  const { searchQuery } = useParams()
+
+  const [searchParams, setSearchParams] = useSearchParams()
+  const dispatch = useAppDispatch()
+  const movies = useAppSelector(selectAllMovies)
+
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false)
   const [isDeleteSuccessModalOpen, setIsDeleteSuccessModalOpen] = useState<boolean>(false)
 
@@ -28,16 +36,28 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
   const [sortOption, setSortOption] = useState<SortOption>(SORT_OPTIONS[0])
   const [selectedGenre, setSelectedGenre] = useState(GENRES[0])
 
-  const dispatch = useAppDispatch()
-  const movies = useAppSelector(selectAllMovies)
-
   useEffect(() => {
-    if (selectedGenre === GENRES[0]) {
-      void dispatch(fetchAllMovies({ sort: sortOption.id }))
-    } else {
-      void dispatch(fetchAllMovies({ genres: [selectedGenre.id], sort: sortOption.id }))
+    const sortById = searchParams.get('sortBy') as 'vote_average' | 'release_date' | undefined
+    const genreId = searchParams.get('genre') || GENRES[0].id
+
+    if (sortById) {
+      const option = SORT_OPTIONS.find(({ id }) => id === sortById)
+
+      setSortOption(option || SORT_OPTIONS[0])
     }
-  }, [sortOption, dispatch, selectedGenre, editableMovieId])
+
+    if (genreId) {
+      const genre = GENRES.find(({ id }) => id === genreId)
+
+      setSelectedGenre(genre || GENRES[0])
+    }
+
+    void dispatch(fetchAllMovies({
+      genres: genreId === GENRES[0].id ? [] : [genreId],
+      search: searchQuery,
+      sort: sortById
+    }))
+  }, [sortOption, dispatch, selectedGenre, editableMovieId, searchQuery, searchParams])
 
   const handleDeleteClick = (id: number): void => {
     setIsDeleteModalOpen(true)
@@ -65,16 +85,20 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     setEditableMovieId(null)
   }
 
-  const handleGenreSelect = (genre: Genre): void => {
-    setSelectedGenre(genre)
+  const handleGenreSelect = ({ id }: Genre): void => {
+    if (id === GENRES[0].id) {
+      setSearchParams(removeFromParams(searchParams, 'genre'))
+    } else {
+      setSearchParams(appendToParams(searchParams, { genre: id }))
+    }
   }
 
-  const handleSortSelect = (option: SortOption): void => {
-    setSortOption(option)
+  const handleSortSelect = ({ id }: SortOption): void => {
+    setSearchParams(appendToParams(searchParams, { sortBy: id }))
   }
 
   const handleCardClick = (id: number): void => {
-    void dispatch(fetchSingleMovie(id))
+    setSearchParams(appendToParams(searchParams, { movie: id.toString() }))
   }
 
   return (

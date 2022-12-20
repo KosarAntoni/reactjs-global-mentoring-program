@@ -1,7 +1,9 @@
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
+import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import background from 'assets/header-background.png'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
-import { addMovie, clearSingleMovie, selectSingleMovie } from 'store/moviesSlice'
+import { addMovie, clearSingleMovie, fetchSingleMovie, selectSingleMovie } from 'store/moviesSlice'
+import { removeFromParams } from 'utilities'
 
 import Button from 'components/Button'
 import Logo from 'components/Logo'
@@ -14,6 +16,9 @@ import './Header.styles.scss'
 
 const Header: FC = () => {
   const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const { searchQuery } = useParams()
+  const [searchParams, setSearchParams] = useSearchParams()
 
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
   const [isAddSuccessModalOpen, setIsAddSuccessModalOpen] = useState<boolean>(false)
@@ -27,7 +32,19 @@ const Header: FC = () => {
 
   const handleSearchButtonClick = () => {
     dispatch(clearSingleMovie())
+    setSearchParams(removeFromParams(searchParams, 'movie'))
   }
+
+  const handleSearchSubmit = (value: string) => {
+    navigate(`/search/${value}`)
+  }
+
+  useEffect(() => {
+    const id = searchParams.get('movie')
+    if (id) { void dispatch(fetchSingleMovie(+id)) } else {
+      dispatch(clearSingleMovie())
+    }
+  }, [dispatch, searchParams])
 
   return (
     <>
@@ -48,10 +65,9 @@ const Header: FC = () => {
                 src={background}
               />
 
-              <Search className='header__search' />
+              <Search className='header__search' defaultValue={searchQuery} handleSearchSubmit={handleSearchSubmit} />
             </>
-            )
-        }
+          )}
 
       </header>
 
