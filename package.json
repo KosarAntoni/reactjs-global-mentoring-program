@@ -17,7 +17,7 @@
     "lint:fix": "npm run lint --fix",
     "lint:styles": "stylelint '**/*.scss' --cache",
     "lint:styles-fix": "npm run lint:styles --fix",
-    "test": "jest",
+    "test": "jest --collectCoverage",
     "clean": "npx rimraf dist",
     "clean:all": "npm run clean build node_modules",
     "prepare": "husky install"
