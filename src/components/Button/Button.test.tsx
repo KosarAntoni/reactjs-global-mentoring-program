@@ -10,18 +10,18 @@ const testFunction = jest.fn()
 test('the Button component renders correctly with required and optional props', () => {
   render(<Button className='test-class' onClick={testFunction}>Test</Button>)
 
-  const buttonNode = screen.getByRole('button', { name: 'Test' })
+  const node = screen.getByRole('button', { name: 'Test' })
 
   // the component has been rendered
-  expect(buttonNode).toBeInTheDocument()
+  expect(node).toBeInTheDocument()
 
   // generating a snapshot, not for testing purposes but only to see what changes in the HTML structure during CR if the developer updates the snapshot
-  expect(buttonNode).toMatchSnapshot()
+  expect(node).toMatchSnapshot()
 
   // after click right function is called
-  fireEvent.click(buttonNode)
+  fireEvent.click(node)
   expect(testFunction).toBeCalled()
 
   // the comonent has correct classes
-  expect(buttonNode).toHaveClass('button button--solid test-class')
+  expect(node).toHaveClass('button button--solid test-class')
 })

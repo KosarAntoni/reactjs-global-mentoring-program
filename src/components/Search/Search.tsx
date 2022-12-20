@@ -16,12 +16,12 @@ const Search: FC<SearchProps> = ({ className, handleSearchSubmit, defaultValue }
     const target = event.target as typeof event.target & {
       search: { value: string }
     }
-    handleSearchSubmit(target.search.value)
+    handleSearchSubmit(target.search?.value)
   }
 
   return (
-    <form className={classNames('search', className)} onSubmit={handleSubmit}>
-      <h1 className='search__heading'>FIND YOUR MOViE</h1>
+    <form className={classNames('search', className)} data-testid='search-node' onSubmit={handleSubmit}>
+      <h1 className='search__heading'>FIND YOUR MOVIE</h1>
 
       <Input
         className='search__input'

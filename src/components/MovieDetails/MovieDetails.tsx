@@ -19,7 +19,7 @@ const MovieDetails: FC<MovieDetailsProps> = ({
   const year = new Date(releaseDate).getFullYear()
 
   return (
-    <div className={classNames('movie-details', className)}>
+    <div className={classNames('movie-details', className)} data-testid='movie-details-node'>
       <img alt={title} src={posterPath} />
 
       <div>

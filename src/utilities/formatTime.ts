@@ -2,7 +2,7 @@ export const numberToTime = (minutes: number): string => {
   const hours = Math.floor(minutes / 60)
   const minutesLeft = minutes % 60
   return `${hours < 10 ? '0' : ''}${hours}h ${minutesLeft < 10 ? '0' : ''
-    }${minutesLeft} min`
+    }${minutesLeft}min`
 }
 
 export const numberToFormTime = (minutes: number): string => {
@@ -14,5 +14,7 @@ export const numberToFormTime = (minutes: number): string => {
 
 export const timeToNumber = (time: string) => {
   const [hours, minutes] = time.split(/[.:]/)
+  if (!hours || !minutes) return 0
+
   return +hours * 60 + +minutes
 }

@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the CheckboxField component renders correctly with required and optional props 1`] = `
+<label
+  class="checkbox-field test-class"
+  data-testid="checkbox-node"
+  for="test"
+>
+  <input
+    class="checkbox-field__input"
+    id="test"
+    type="checkbox"
+  />
+  <span
+    class="checkbox-field__custom-checkbox"
+  />
+  <span
+    class="checkbox-field__label"
+  >
+    test label
+  </span>
+</label>
+`;

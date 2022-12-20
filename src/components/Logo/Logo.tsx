@@ -6,7 +6,7 @@ import { LogoProps } from './Logo.models'
 import './Logo.styles.scss'
 
 const Logo: FC<LogoProps> = ({ className }) => (
-  <span className={classNames('logo', className)}>
+  <span className={classNames('logo', className)} data-testid='logo-node'>
     <b>netflix</b>
     roulette
   </span>

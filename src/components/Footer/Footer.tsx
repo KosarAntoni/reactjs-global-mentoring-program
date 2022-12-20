@@ -6,7 +6,7 @@ import './Footer.styles.scss'
 
 const Footer: FC = () => {
   return (
-    <footer className='footer'>
+    <footer className='footer' data-testid='footer-node'>
       <Logo/>
     </footer>
   )
