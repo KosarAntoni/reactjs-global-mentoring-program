@@ -52,5 +52,6 @@ module.exports = {
         ]
       }
     ]
-  }
+  },
+  ignorePatterns: ['node_modules', 'cypress', 'cypress.config.ts']
 }
