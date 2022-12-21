@@ -102,7 +102,7 @@ export interface MoviesState {
   single?: Movie | null
 }
 
-const initialState: MoviesState = {
+export const initialState: MoviesState = {
   all: []
 }
 

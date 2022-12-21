@@ -20,6 +20,7 @@
       "utilities/*": ["utilities/*"],
       "store/*": ["store/*"],
       "consts/*": ["consts/*"]
-    }
-  }
+    },
+  },
+  "exclude": ["node_modules", "cypress", "cypress.config.ts"]
 }

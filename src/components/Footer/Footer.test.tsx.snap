@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Footer component renders correctly with required and optional props 1`] = `
+<footer
+  class="footer"
+  data-testid="footer-node"
+>
+  <span
+    class="logo"
+    data-testid="logo-node"
+  >
+    <b>
+      netflix
+    </b>
+    roulette
+  </span>
+</footer>
+`;

@@ -8,6 +8,7 @@ export const appendToParams = (searchParams: URLSearchParams, newValue?: { [n: s
 }
 
 export const removeFromParams = (searchParams: URLSearchParams, removeKey: string) => {
+    if (!searchParams) return {}
     const params: any = {}
     searchParams.forEach((value: string | null, key: string) => {
         if (removeKey === key) return

@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Logo component renders correctly with required and optional props 1`] = `
+<span
+  class="logo test-class"
+  data-testid="logo-node"
+>
+  <b>
+    netflix
+  </b>
+  roulette
+</span>
+`;

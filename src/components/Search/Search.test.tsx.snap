@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Search component renders correctly with required and optional props 1`] = `
+<form
+  class="search test-class"
+  data-testid="search-node"
+>
+  <h1
+    class="search__heading"
+  >
+    FIND YOUR MOVIE
+  </h1>
+  <input
+    class="input search__input"
+    name="search"
+    placeholder="What do you want to watch?"
+    value="input test"
+  />
+  <button
+    class="button button--solid search__button"
+    type="submit"
+  >
+    Search
+  </button>
+</form>
+`;

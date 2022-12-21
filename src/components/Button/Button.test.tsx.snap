@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`the Button component renders correctly with required and optional props 1`] = `
+<button
+  class="button button--solid test-class"
+>
+  Test
+</button>
+`;
