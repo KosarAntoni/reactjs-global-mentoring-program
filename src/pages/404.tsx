@@ -2,19 +2,19 @@ import React from 'react'
 import type { NextPage } from 'next'
 import Head from 'next/head'
 
-import Layout from 'templates/Layout'
+import NotFound from 'templates/NotFound'
 
-const IndexPage: NextPage = () => {
+const NotFoundPage: NextPage = () => {
     return (
       <>
         <Head>
-          <title>Index</title>
+          <title>Not Found</title>
           <link href='/favicon.ico' rel='icon' />
         </Head>
 
-        <Layout />
+        <NotFound/>
       </>
-    )
-  }
+)
+}
 
-export default IndexPage
+export default NotFoundPage
