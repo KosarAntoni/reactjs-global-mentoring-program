@@ -21,7 +21,6 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
   const { query, push } = useRouter()
   const { searchQuery } = query
 
-  // const [query, push] = usequery()
   const dispatch = useAppDispatch()
   const movies = useAppSelector(selectAllMovies)
 
@@ -53,7 +52,7 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
 
     void dispatch(fetchAllMovies({
       genres: genreId === GENRES[0].id ? [] : [genreId.toString()],
-      search: searchQuery,
+      search: searchQuery || '',
       sort: sortById
     }))
   }, [sortOption, dispatch, selectedGenre, editableMovieId, searchQuery, query])
