@@ -14,8 +14,8 @@ import SuccessModal from 'components/SuccessModal'
 
 const Header: FC = () => {
   const dispatch = useAppDispatch()
-  const router = useRouter()
-  const { searchQuery } = router.query
+  const { query, push } = useRouter()
+  const { searchQuery } = query
 
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
   const [isAddSuccessModalOpen, setIsAddSuccessModalOpen] = useState<boolean>(false)
@@ -29,19 +29,19 @@ const Header: FC = () => {
 
   const handleSearchButtonClick = () => {
     dispatch(clearSingleMovie())
-    void router.push({ query: removeFromParams(router.query, 'movie') })
+    void push({ query: removeFromParams(query, 'movie') })
   }
 
   const handleSearchSubmit = (value: string) => {
-    void router.push(`/search/${value}`)
+    void push(`/search/${value}`)
   }
 
   useEffect(() => {
-    const id = router.query.movie
+    const id = query.movie
     if (id) { void dispatch(fetchSingleMovie(+id)) } else {
       dispatch(clearSingleMovie())
     }
-  }, [dispatch, router.query])
+  }, [dispatch, query])
 
   return (
     <>
