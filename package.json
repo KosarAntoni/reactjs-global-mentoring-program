@@ -13,10 +13,8 @@
   },
   "scripts": {
     "dev": "next dev",
-    "build:next": "next build",
-    "start:next": "next start",
-    "start": "webpack serve",
-    "build": "webpack",
+    "build": "next build",
+    "start": "next start",
     "lint": "eslint . --cache",
     "lint:fix": "npm run lint --fix",
     "lint:styles": "stylelint '**/*.scss' --cache",
