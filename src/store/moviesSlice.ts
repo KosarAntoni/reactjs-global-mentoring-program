@@ -1,5 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { API_URL, MOVIES_LIMIT } from 'consts'
+import { HYDRATE } from 'next-redux-wrapper'
 import { RootState } from 'store'
 
 export const fetchAllMovies = createAsyncThunk(
@@ -121,6 +122,10 @@ export const moviesSlice = createSlice({
       })
       .addCase(fetchSingleMovie.fulfilled, (state, action) => {
         state.single = action.payload
+      })
+      .addCase(HYDRATE, (state, action) => {
+        const typedAction = action as PayloadAction<RootState>
+        state.all = typedAction.payload.movies.all
       })
   }
 })

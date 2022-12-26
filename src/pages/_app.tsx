@@ -1,16 +1,19 @@
 
-import React from 'react'
+import React, { FC } from 'react'
 import { Provider } from 'react-redux'
 import type { AppProps } from 'next/app'
-import store from 'store'
+import { wrapper } from 'store'
 
 import '../styles/index.scss'
 
-export default function App ({ Component, pageProps }: AppProps) {
+const App: FC<AppProps> = ({ Component, ...rest }) => {
+  const { store, props } = wrapper.useWrappedStore(rest)
   return (
     <Provider store={store}>
-      <Component {...pageProps} />
-      <div id='modal-root'></div>
+      <Component {...props.pageProps} />
+      <div id='modal-root'/>
     </Provider>
   )
 }
+
+export default App
