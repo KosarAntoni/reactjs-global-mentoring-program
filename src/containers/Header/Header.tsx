@@ -3,7 +3,7 @@ import React, { FC, useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { addMovie, clearSingleMovie, fetchSingleMovie, selectSingleMovie } from 'store/moviesSlice'
-import { removeFromParams } from 'utilities'
+import { removeFromParams, urlSearchParams } from 'utilities'
 
 import Button from 'components/Button'
 import Logo from 'components/Logo'
@@ -29,7 +29,7 @@ const Header: FC = () => {
 
   const handleSearchButtonClick = () => {
     dispatch(clearSingleMovie())
-    void push({ query: removeFromParams(query, 'movie') })
+    void push({ query: removeFromParams(query as urlSearchParams, 'movie') })
   }
 
   const handleSearchSubmit = (value: string) => {

@@ -4,7 +4,7 @@ import { GENRES, SORT_OPTIONS } from 'consts'
 import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { deleteMovie, editMovie, fetchAllMovies, Movie, selectAllMovies } from 'store/moviesSlice'
-import { appendToParams, removeFromParams } from 'utilities'
+import { appendToParams, removeFromParams, urlSearchParams } from 'utilities'
 
 import GenreSelect from 'components/GenreSelect'
 import { Genre } from 'components/GenreSelect/GenreSelect.models'
@@ -86,18 +86,18 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
 
   const handleGenreSelect = ({ id }: Genre): void => {
     if (id === GENRES[0].id) {
-      void push({ query: removeFromParams(query, 'genre') })
+      void push({ query: removeFromParams(query as urlSearchParams, 'genre') })
     } else {
-      void push({ query: appendToParams(query, { genre: id }) })
+      void push({ query: appendToParams(query as urlSearchParams, { genre: id }) })
     }
   }
 
   const handleSortSelect = ({ id }: SortOption): void => {
-    void push({ query: appendToParams(query, { sortBy: id }) })
+    void push({ query: appendToParams(query as urlSearchParams, { sortBy: id }) })
   }
 
   const handleCardClick = (id: number): void => {
-    void push({ query: appendToParams(query, { movie: id.toString() }) })
+    void push({ query: appendToParams(query as urlSearchParams, { movie: id.toString() }) })
   }
 
   return (
