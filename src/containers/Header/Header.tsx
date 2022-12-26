@@ -1,5 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
 // import background from 'assets/header-background.png'
+import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { addMovie, clearSingleMovie, fetchSingleMovie, selectSingleMovie } from 'store/moviesSlice'
@@ -56,10 +57,18 @@ const Header: FC = () => {
           ? <MovieDetails {...movie} className='header__movie-details' />
           : (
             <>
-              <img
+              {/* <img
                 alt='header-background'
                 className='header__background'
-                // src={background}
+                src={background}
+              /> */}
+
+              <Image
+                alt='header-background'
+                className='header__background'
+                height='543'
+                src='/header-background.png'
+                width='1000'
               />
 
               <Search className='header__search' defaultValue={searchQuery} handleSearchSubmit={handleSearchSubmit} />
