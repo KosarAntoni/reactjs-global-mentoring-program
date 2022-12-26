@@ -5,8 +5,6 @@ import Input from 'components/Input/Input'
 
 import { InputFieldProps } from './InputField.models'
 
-import './InputField.styles.scss'
-
 const InputField: FC<InputFieldProps> = ({ id, value, error, label, className, ...props }) => {
   return (
     <label className={classNames('input-field', className)} htmlFor={id}>

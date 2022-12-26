@@ -3,8 +3,6 @@ import classNames from 'classnames'
 
 import { GenreSelectProps } from './GenreSelect.models'
 
-import './GenreSelect.styles.scss'
-
 const GenreSelect: FC<GenreSelectProps> = ({ genres, selectedGenre, handleSelect, className }) => {
   return (
     <div className={classNames('genre-select', className)}>

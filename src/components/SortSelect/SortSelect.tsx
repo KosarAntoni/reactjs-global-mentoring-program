@@ -5,8 +5,6 @@ import Dropdown from 'components/Dropdown'
 
 import { SortSelectProps } from './SortSelect.models'
 
-import './SortSelect.styles.scss'
-
 const SortSelect: FC<SortSelectProps> = ({ className, selectedOption, options, handleSelect }) => {
   return (
     <div className={classNames('sort-select', className)}>

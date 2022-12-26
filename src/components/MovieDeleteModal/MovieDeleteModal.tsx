@@ -6,8 +6,6 @@ import Modal from 'components/Modal'
 
 import { MovieDeleteModalProps } from './MovieDeleteModal.models'
 
-import './MovieDeleteModal.styles.scss'
-
 const MovieDeleteModal: FC<MovieDeleteModalProps> = ({ handleClose, handleSubmit, isOpen }) => {
   const handleConfirmClick = (): void => {
     handleSubmit()

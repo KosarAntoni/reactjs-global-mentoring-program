@@ -4,8 +4,6 @@ import Footer from 'components/Footer'
 import ErrorBoundary from 'containers/ErrorBoundary'
 import Header from 'containers/Header'
 
-import './NotFound.styles.scss'
-
 const NotFound: FC = () => {
   return (
     <div className='not-found'>

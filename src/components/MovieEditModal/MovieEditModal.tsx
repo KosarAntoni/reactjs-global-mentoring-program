@@ -13,8 +13,6 @@ import TextareaField from 'components/TextareaField'
 
 import { MovieEditModalProps } from './MovieEditModal.models'
 
-import './MovieEditModal.styles.scss'
-
 const initialState = {
   title: '',
   vote_average: 0,

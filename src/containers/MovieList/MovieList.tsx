@@ -17,8 +17,6 @@ import SuccessModal from 'components/SuccessModal'
 
 import { MovieListProps } from './MovieList.models'
 
-import './MovieList.styles.scss'
-
 const MovieList: FC<MovieListProps> = ({ className }) => {
   const { searchQuery } = useParams()
 

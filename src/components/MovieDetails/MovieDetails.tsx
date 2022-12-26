@@ -4,8 +4,6 @@ import { formatGenres, numberToTime } from 'utilities'
 
 import { MovieDetailsProps } from './MovieDetails.models'
 
-import './MovieDetails.styles.scss'
-
 const MovieDetails: FC<MovieDetailsProps> = ({
   title,
   overview,

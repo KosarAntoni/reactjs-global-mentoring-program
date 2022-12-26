@@ -1,6 +1,6 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import background from 'assets/header-background.png'
+// import background from 'assets/header-background.png'
+import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { addMovie, clearSingleMovie, fetchSingleMovie, selectSingleMovie } from 'store/moviesSlice'
 import { removeFromParams } from 'utilities'
@@ -12,13 +12,10 @@ import MovieEditModal from 'components/MovieEditModal'
 import Search from 'components/Search'
 import SuccessModal from 'components/SuccessModal'
 
-import './Header.styles.scss'
-
 const Header: FC = () => {
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-  const { searchQuery } = useParams()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const router = useRouter()
+  const { searchQuery } = router.query
 
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
   const [isAddSuccessModalOpen, setIsAddSuccessModalOpen] = useState<boolean>(false)
@@ -32,19 +29,19 @@ const Header: FC = () => {
 
   const handleSearchButtonClick = () => {
     dispatch(clearSingleMovie())
-    setSearchParams(removeFromParams(searchParams, 'movie'))
+    void router.push({ query: removeFromParams(router.query, 'movie') })
   }
 
   const handleSearchSubmit = (value: string) => {
-    navigate(`/search/${value}`)
+    void router.push(`/search/${value}`)
   }
 
   useEffect(() => {
-    const id = searchParams.get('movie')
+    const id = router.query.movie
     if (id) { void dispatch(fetchSingleMovie(+id)) } else {
       dispatch(clearSingleMovie())
     }
-  }, [dispatch, searchParams])
+  }, [dispatch, router.query])
 
   return (
     <>
@@ -62,7 +59,7 @@ const Header: FC = () => {
               <img
                 alt='header-background'
                 className='header__background'
-                src={background}
+                // src={background}
               />
 
               <Search className='header__search' defaultValue={searchQuery} handleSearchSubmit={handleSearchSubmit} />
