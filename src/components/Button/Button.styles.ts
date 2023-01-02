@@ -1,5 +1,7 @@
 import styled from '@emotion/styled'
 
+// Tryed this approach just to see how using emotion with props will look like
+
 export const buttonBase = `
   cursor: pointer;
   padding: 1.8rem 7.5rem;

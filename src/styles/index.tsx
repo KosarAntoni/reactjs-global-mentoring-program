@@ -1,12 +1,15 @@
 import React from 'react'
 import { css, Global } from '@emotion/react'
 
+import { fonts } from './fonts'
 import { normalize } from './normalize'
 import { variables } from './variables'
 
 const global = css`
   ${normalize}
   ${variables}
+  ${fonts}
+
   html {
     font-size: 62.5%;
   }
