@@ -1,28 +1,24 @@
-@import "./normalize";
-@import "./variables";
-@import "./fonts";
-@import "./app";
+/* stylelint-disable */
 
-@import "./components/Button";
-@import "./components/CheckboxField";
-@import "./components/Dropdown";
-@import "./components/Footer";
-@import "./components/GenreSelect";
-@import "./components/Input";
-@import "./components/InputField";
-@import "./components/Logo";
-@import "./components/Modal";
-@import "./components/MovieCard";
-@import "./components/MovieDeleteModal";
-@import "./components/MovieDetails";
-@import "./components/MovieEditModal";
-@import "./components/Search";
-@import "./components/SortSelect";
-@import "./components/SuccessModal";
-@import "./components/TextAreaField";
+@import './components/CheckboxField';
+@import './components/Dropdown';
+@import './components/Footer';
+@import './components/GenreSelect';
+@import './components/Input';
+@import './components/InputField';
+@import './components/Logo';
+@import './components/Modal';
+@import './components/MovieCard';
+@import './components/MovieDeleteModal';
+@import './components/MovieDetails';
+@import './components/MovieEditModal';
+@import './components/Search';
+@import './components/SortSelect';
+@import './components/SuccessModal';
+@import './components/TextAreaField';
 
-@import "./containers/Header";
-@import "./containers/MovieList";
+@import './containers/Header';
+@import './containers/MovieList';
 
-@import "./templates/Layout";
-@import "./templates/NotFound";
+@import './templates/Layout';
+@import './templates/NotFound';
