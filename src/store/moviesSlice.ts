@@ -1,13 +1,14 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { API_URL, MOVIES_LIMIT } from 'consts'
+import { HYDRATE } from 'next-redux-wrapper'
 import { RootState } from 'store'
 
 export const fetchAllMovies = createAsyncThunk(
   'movies/fetchSortedMovies',
-  async ({ genres, sort, search, limit = MOVIES_LIMIT }: { genres?: string[], sort?: 'vote_average' | 'release_date', search?: string, limit?: number }) => {
+  async ({ genres, sort, search, limit = MOVIES_LIMIT }: { genres?: string[], sort?: 'vote_average' | 'release_date', search?: string | string[], limit?: number }) => {
     const url = [
       `${API_URL}/movies?`,
-      `${search ? `search=${search}&searchBy=title&` : ''}`,
+      `${search ? `search=${search.toString()}&searchBy=title&` : ''}`,
       `${sort ? `sortBy=${sort}&sortOrder=desc&` : ''}`,
       `${genres ? `filter=${genres.join(',')}&` : ''}`,
       `limit=${limit}`
@@ -121,6 +122,10 @@ export const moviesSlice = createSlice({
       })
       .addCase(fetchSingleMovie.fulfilled, (state, action) => {
         state.single = action.payload
+      })
+      .addCase(HYDRATE, (state, action) => {
+        const typedAction = action as PayloadAction<RootState>
+        state.all = typedAction.payload.movies.all
       })
   }
 })

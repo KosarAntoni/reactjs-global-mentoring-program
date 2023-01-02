@@ -4,8 +4,6 @@ import Modal from 'components/Modal'
 
 import { SuccessModalProps } from './SuccessModal.models'
 
-import './SuccessModal.styles.scss'
-
 const SuccessModal: FC<SuccessModalProps> = ({ isOpen, handleClose, description }) => {
   return (
     <Modal {...{ isOpen, handleClose }} className='success-modal'>

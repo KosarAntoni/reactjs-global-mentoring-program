@@ -5,8 +5,6 @@ import ErrorBoundary from 'containers/ErrorBoundary'
 import Header from 'containers/Header'
 import MovieList from 'containers/MovieList'
 
-import './Layout.styles.scss'
-
 const Layout: FC = () => {
   return (
     <div className='layout'>

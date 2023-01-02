@@ -6,8 +6,6 @@ import Input from 'components/Input'
 
 import { SearchProps } from './Search.models'
 
-import './Search.styles.scss'
-
 const Search: FC<SearchProps> = ({ className, handleSearchSubmit, defaultValue }) => {
   const handleSubmit = (event: React.SyntheticEvent) => {
     event.preventDefault()

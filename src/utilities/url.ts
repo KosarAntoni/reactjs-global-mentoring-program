@@ -1,19 +1,13 @@
-export const appendToParams = (searchParams: URLSearchParams, newValue?: { [n: string]: string | null }) => {
-    const params: any = {}
-    searchParams.forEach((value: string | null, key: string) => {
-        params[key] = value
-    })
-
-    return ({ ...params, ...newValue })
+export interface urlSearchParams {
+    [n: string]: string
 }
 
-export const removeFromParams = (searchParams: URLSearchParams, removeKey: string) => {
-    const params: any = {}
-    searchParams.forEach((value: string | null, key: string) => {
-        if (removeKey === key) return
+export const appendToParams = (searchParams: urlSearchParams, newValue?: urlSearchParams) => {
+    return ({ ...searchParams, ...newValue })
+}
 
-        params[key] = value
-    })
-
-    return ({ ...params })
+export const removeFromParams = (searchParams: urlSearchParams, removeKey: string) => {
+    return Object.entries(searchParams).reduce((previousValue, [key, value]) => {
+        return key === removeKey ? previousValue : { ...previousValue, key: value }
+    }, {})
 }

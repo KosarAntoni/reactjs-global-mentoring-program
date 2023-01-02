@@ -3,8 +3,6 @@ import classNames from 'classnames'
 
 import { TextareaFieldProps } from './TextareaField.models'
 
-import './TextareaField.styles.scss'
-
 const TextareaField: FC<TextareaFieldProps> = ({ className, id, label, error, value, ...props }) => {
   return (
     <label className={classNames('textarea-field', className)} htmlFor={id}>

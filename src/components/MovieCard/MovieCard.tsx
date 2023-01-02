@@ -4,8 +4,6 @@ import { formatGenres } from 'utilities'
 
 import { MovieCardProps } from './MovieCard.models'
 
-import './MovieCard.styles.scss'
-
 const MovieCard: FC<MovieCardProps> = ({ title, genres, posterPath, releaseDate, options, className, onClick }) => {
   const [isSelectOpen, setIsSelectOpen] = useState<boolean>(false)
 

@@ -1,9 +1,10 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useNavigate, useParams, useSearchParams } from 'react-router-dom'
-import background from 'assets/header-background.png'
+// import background from 'assets/header-background.png'
+import Image from 'next/image'
+import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { addMovie, clearSingleMovie, fetchSingleMovie, selectSingleMovie } from 'store/moviesSlice'
-import { removeFromParams } from 'utilities'
+import { removeFromParams, urlSearchParams } from 'utilities'
 
 import Button from 'components/Button'
 import Logo from 'components/Logo'
@@ -12,13 +13,10 @@ import MovieEditModal from 'components/MovieEditModal'
 import Search from 'components/Search'
 import SuccessModal from 'components/SuccessModal'
 
-import './Header.styles.scss'
-
 const Header: FC = () => {
   const dispatch = useAppDispatch()
-  const navigate = useNavigate()
-  const { searchQuery } = useParams()
-  const [searchParams, setSearchParams] = useSearchParams()
+  const { query, push } = useRouter()
+  const { searchQuery } = query
 
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false)
   const [isAddSuccessModalOpen, setIsAddSuccessModalOpen] = useState<boolean>(false)
@@ -32,19 +30,19 @@ const Header: FC = () => {
 
   const handleSearchButtonClick = () => {
     dispatch(clearSingleMovie())
-    setSearchParams(removeFromParams(searchParams, 'movie'))
+    void push({ query: removeFromParams(query as urlSearchParams, 'movie') })
   }
 
   const handleSearchSubmit = (value: string) => {
-    navigate(`/search/${value}`)
+    void push(`/search/${value}`)
   }
 
   useEffect(() => {
-    const id = searchParams.get('movie')
+    const id = query.movie
     if (id) { void dispatch(fetchSingleMovie(+id)) } else {
       dispatch(clearSingleMovie())
     }
-  }, [dispatch, searchParams])
+  }, [dispatch, query])
 
   return (
     <>
@@ -59,10 +57,18 @@ const Header: FC = () => {
           ? <MovieDetails {...movie} className='header__movie-details' />
           : (
             <>
-              <img
+              {/* <img
                 alt='header-background'
                 className='header__background'
                 src={background}
+              /> */}
+
+              <Image
+                alt='header-background'
+                className='header__background'
+                height='543'
+                src='/header-background.png'
+                width='1000'
               />
 
               <Search className='header__search' defaultValue={searchQuery} handleSearchSubmit={handleSearchSubmit} />

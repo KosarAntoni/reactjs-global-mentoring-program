@@ -3,8 +3,6 @@ import classNames from 'classnames'
 
 import { DropdownProps } from './Dropdown.models'
 
-import './Dropdown.styles.scss'
-
 const Dropdown: FC<DropdownProps> = ({ toggle, children, className }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 

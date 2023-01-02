@@ -1,10 +1,10 @@
 import React, { FC, useEffect, useState } from 'react'
-import { useParams, useSearchParams } from 'react-router-dom'
 import classNames from 'classnames'
 import { GENRES, SORT_OPTIONS } from 'consts'
+import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { deleteMovie, editMovie, fetchAllMovies, Movie, selectAllMovies } from 'store/moviesSlice'
-import { appendToParams, removeFromParams } from 'utilities'
+import { appendToParams, removeFromParams, urlSearchParams } from 'utilities'
 
 import GenreSelect from 'components/GenreSelect'
 import { Genre } from 'components/GenreSelect/GenreSelect.models'
@@ -17,12 +17,10 @@ import SuccessModal from 'components/SuccessModal'
 
 import { MovieListProps } from './MovieList.models'
 
-import './MovieList.styles.scss'
-
 const MovieList: FC<MovieListProps> = ({ className }) => {
-  const { searchQuery } = useParams()
+  const { query, push } = useRouter()
+  const { searchQuery } = query
 
-  const [searchParams, setSearchParams] = useSearchParams()
   const dispatch = useAppDispatch()
   const movies = useAppSelector(selectAllMovies)
 
@@ -37,8 +35,8 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
   const [selectedGenre, setSelectedGenre] = useState(GENRES[0])
 
   useEffect(() => {
-    const sortById = searchParams.get('sortBy') as 'vote_average' | 'release_date' | undefined
-    const genreId = searchParams.get('genre') || GENRES[0].id
+    const sortById = query.sortBy as 'vote_average' | 'release_date' | undefined
+    const genreId = query.genre || GENRES[0].id
 
     if (sortById) {
       const option = SORT_OPTIONS.find(({ id }) => id === sortById)
@@ -53,11 +51,11 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
     }
 
     void dispatch(fetchAllMovies({
-      genres: genreId === GENRES[0].id ? [] : [genreId],
-      search: searchQuery,
+      genres: genreId === GENRES[0].id ? [] : [genreId.toString()],
+      search: searchQuery || '',
       sort: sortById
     }))
-  }, [sortOption, dispatch, selectedGenre, editableMovieId, searchQuery, searchParams])
+  }, [sortOption, dispatch, selectedGenre, editableMovieId, searchQuery, query])
 
   const handleDeleteClick = (id: number): void => {
     setIsDeleteModalOpen(true)
@@ -87,18 +85,18 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
 
   const handleGenreSelect = ({ id }: Genre): void => {
     if (id === GENRES[0].id) {
-      setSearchParams(removeFromParams(searchParams, 'genre'))
+      void push({ query: removeFromParams(query as urlSearchParams, 'genre') })
     } else {
-      setSearchParams(appendToParams(searchParams, { genre: id }))
+      void push({ query: appendToParams(query as urlSearchParams, { genre: id }) })
     }
   }
 
   const handleSortSelect = ({ id }: SortOption): void => {
-    setSearchParams(appendToParams(searchParams, { sortBy: id }))
+    void push({ query: appendToParams(query as urlSearchParams, { sortBy: id }) })
   }
 
   const handleCardClick = (id: number): void => {
-    setSearchParams(appendToParams(searchParams, { movie: id.toString() }))
+    void push({ query: appendToParams(query as urlSearchParams, { movie: id.toString() }) })
   }
 
   return (
