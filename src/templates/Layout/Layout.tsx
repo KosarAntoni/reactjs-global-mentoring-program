@@ -5,15 +5,17 @@ import ErrorBoundary from 'containers/ErrorBoundary'
 import Header from 'containers/Header'
 import MovieList from 'containers/MovieList'
 
+import { StyledLayout } from './Layout.styles'
+
 const Layout: FC = () => {
   return (
-    <div className='layout'>
+    <StyledLayout>
       <ErrorBoundary>
         <Header />
-        <MovieList/>
-        <Footer/>
+        <MovieList />
+        <Footer />
       </ErrorBoundary>
-    </div>
+    </StyledLayout>
   )
 }
 

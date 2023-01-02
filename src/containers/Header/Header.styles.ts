@@ -1,4 +1,6 @@
-.header {
+import styled from '@emotion/styled'
+
+export const StyledHeader = styled.header`
   position: relative;
 
   overflow: hidden;
@@ -10,7 +12,7 @@
   height: 100%;
   padding: 1.8rem 7rem;
 
-  &__background {
+  & .background {
     position: absolute;
     z-index: -1;
     top: -20%;
@@ -22,18 +24,18 @@
     filter: blur(4px);
   }
 
-  &__search {
+  & .search {
     grid-area: 2 / 1 / 2 / 3;
 
     width: 90%;
     margin: 1.8rem auto 15rem;
   }
 
-  &__details {
+  & .details {
     grid-area: 2 / 1 / 2 / 3;
   }
 
-  &__search-button {
+  & .search-button {
     cursor: pointer;
 
     position: relative;
@@ -51,7 +53,7 @@
     border-radius: 100%;
 
     &::after {
-      content: "";
+      content: '';
 
       position: absolute;
       top: 10px;
@@ -68,4 +70,4 @@
       border-radius: 3px;
     }
   }
-}
+`

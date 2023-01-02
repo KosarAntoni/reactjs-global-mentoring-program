@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react'
-// import background from 'assets/header-background.png'
 import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
@@ -12,6 +11,8 @@ import MovieDetails from 'components/MovieDetails'
 import MovieEditModal from 'components/MovieEditModal'
 import Search from 'components/Search'
 import SuccessModal from 'components/SuccessModal'
+
+import { StyledHeader } from './Header.styles'
 
 const Header: FC = () => {
   const dispatch = useAppDispatch()
@@ -46,36 +47,30 @@ const Header: FC = () => {
 
   return (
     <>
-      <header className='header'>
+      <StyledHeader>
         <Logo />
 
         {movie
-          ? <button className='header__search-button' onClick={handleSearchButtonClick} type='button' />
+          ? <button className='search-button' onClick={handleSearchButtonClick} type='button' />
           : <Button onClick={() => setIsAddModalOpen(true)} style='transparent'>+ add movie</Button>}
 
         {movie
           ? <MovieDetails {...movie} className='header__movie-details' />
           : (
             <>
-              {/* <img
-                alt='header-background'
-                className='header__background'
-                src={background}
-              /> */}
-
               <Image
                 alt='header-background'
-                className='header__background'
+                className='background'
                 height='543'
                 src='/header-background.png'
                 width='1000'
               />
 
-              <Search className='header__search' defaultValue={searchQuery} handleSearchSubmit={handleSearchSubmit} />
+              <Search className='search' defaultValue={searchQuery} handleSearchSubmit={handleSearchSubmit} />
             </>
           )}
 
-      </header>
+      </StyledHeader>
 
       <MovieEditModal
         handleClose={() => setIsAddModalOpen(false)}

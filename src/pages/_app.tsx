@@ -6,15 +6,13 @@ import { wrapper } from 'store'
 
 import { globalStyles } from 'styles/index'
 
-import '../styles/index.scss'
-
 const App: FC<AppProps> = ({ Component, ...rest }) => {
   const { store, props } = wrapper.useWrappedStore(rest)
   return (
     <Provider store={store}>
       {globalStyles}
       <Component {...props.pageProps} />
-      <div id='modal-root'/>
+      <div id='modal-root' />
     </Provider>
   )
 }
