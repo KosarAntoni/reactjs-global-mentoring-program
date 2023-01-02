@@ -1,8 +1,9 @@
 import React, { FC } from 'react'
-import classNames from 'classnames'
 
 import Button from 'components/Button'
 import Input from 'components/Input'
+
+import { StyledSearch } from './Search.styles'
 
 import { SearchProps } from './Search.models'
 
@@ -18,11 +19,11 @@ const Search: FC<SearchProps> = ({ className, handleSearchSubmit, defaultValue }
   }
 
   return (
-    <form className={classNames('search', className)} onSubmit={handleSubmit}>
-      <h1 className='search__heading'>FIND YOUR MOViE</h1>
+    <StyledSearch className={className} onSubmit={handleSubmit}>
+      <h1 className='heading'>FIND YOUR MOViE</h1>
 
       <Input
-        className='search__input'
+        className='input'
         defaultValue={defaultValue || ''}
         name='search'
         placeholder='What do you want to watch?'
@@ -30,12 +31,12 @@ const Search: FC<SearchProps> = ({ className, handleSearchSubmit, defaultValue }
       />
 
       <Button
-        className='search__button'
+        className='button'
         type='submit'
       >
         Search
       </Button>
-    </form>
+    </StyledSearch>
   )
 }
 

@@ -1,4 +1,8 @@
-.movie-delete-modal {
+import styled from '@emotion/styled'
+
+import Modal from 'components/Modal'
+
+export const StyledMovieDeleteModal = styled(Modal)`
   display: flex;
   flex-direction: column;
 
@@ -26,4 +30,4 @@
     display: flex;
     justify-content: flex-end;
   }
-}
+`

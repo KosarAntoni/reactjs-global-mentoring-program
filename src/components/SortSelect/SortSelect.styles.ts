@@ -1,4 +1,6 @@
-.sort-select {
+import styled from '@emotion/styled'
+
+export const StyledSortSelect = styled.div`
   position: relative;
 
   display: flex;
@@ -11,15 +13,13 @@
   color: var(--primary-text);
   text-transform: uppercase;
 
-  &__label {
+  & .label {
     margin-right: 2.2rem;
 
     opacity: 0.6;
   }
 
-  &__toggle {
-    // min-width: 14rem;
-
+  & .toggle {
     color: var(--primary-text);
     text-align: left;
   }
@@ -47,4 +47,4 @@
       }
     }
   }
-}
+`

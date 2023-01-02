@@ -1,23 +1,24 @@
 import React, { FC } from 'react'
-import classNames from 'classnames'
+
+import { StyledTextareaField } from './TextareaField.styles'
 
 import { TextareaFieldProps } from './TextareaField.models'
 
 const TextareaField: FC<TextareaFieldProps> = ({ className, id, label, error, value, ...props }) => {
   return (
-    <label className={classNames('textarea-field', className)} htmlFor={id}>
-      <span className='textarea-field__label'>
+    <StyledTextareaField className={className} htmlFor={id}>
+      <span className='label'>
         {label}
       </span>
 
-      <textarea {...{ id, value, ...props }}/>
+      <textarea {...{ id, value, ...props }} />
 
       {error && (
-      <span className='textarea-field__error'>
-        {error}
-      </span>
+        <span className='error'>
+          {error}
+        </span>
       )}
-    </label>
+    </StyledTextareaField>
   )
 }
 

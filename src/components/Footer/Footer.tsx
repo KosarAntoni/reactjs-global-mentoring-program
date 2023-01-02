@@ -2,11 +2,13 @@ import React, { FC } from 'react'
 
 import Logo from 'components/Logo'
 
+import { StyledFooter } from './Footer.styles'
+
 const Footer: FC = () => {
   return (
-    <footer className='footer'>
-      <Logo/>
-    </footer>
+    <StyledFooter className='footer'>
+      <Logo />
+    </StyledFooter>
   )
 }
 

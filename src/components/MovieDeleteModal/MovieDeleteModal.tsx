@@ -2,7 +2,8 @@ import React, { FC } from 'react'
 import { Form, Formik } from 'formik'
 
 import Button from 'components/Button'
-import Modal from 'components/Modal'
+
+import { StyledMovieDeleteModal } from './MovieDeleteModal.styles'
 
 import { MovieDeleteModalProps } from './MovieDeleteModal.models'
 
@@ -13,10 +14,10 @@ const MovieDeleteModal: FC<MovieDeleteModalProps> = ({ handleClose, handleSubmit
   }
 
   return (
-    <Modal {...{ handleClose, isOpen }} className='movie-delete-modal'>
+    <StyledMovieDeleteModal {...{ handleClose, isOpen }}>
       <h2>
         Delete MOVIE
-      </h2>
+      </h2 >
 
       <p>
         Are you sure you want to delete this movie?
@@ -27,7 +28,7 @@ const MovieDeleteModal: FC<MovieDeleteModalProps> = ({ handleClose, handleSubmit
           <Button type='submit'>CONFIRM</Button>
         </Form>
       </Formik>
-    </Modal>
+    </StyledMovieDeleteModal >
   )
 }
 

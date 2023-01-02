@@ -1,15 +1,17 @@
 import React, { FC, useState } from 'react'
 import classNames from 'classnames'
 
+import { StyledDropdown } from './Dropdown.styles'
+
 import { DropdownProps } from './Dropdown.models'
 
 const Dropdown: FC<DropdownProps> = ({ toggle, children, className }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   return (
-    <div className={classNames('dropdown', { 'dropdown--open': isOpen }, className)}>
+    <StyledDropdown className={classNames({ open: isOpen }, className)}>
       <button
-        className='dropdown__toggle'
+        className='toggle'
         onClick={() => setIsOpen((prevState) => !prevState)}
         type='button'
       >
@@ -17,11 +19,11 @@ const Dropdown: FC<DropdownProps> = ({ toggle, children, className }) => {
       </button>
 
       {isOpen && (
-        <div className='dropdown__content'>
+        <div className='content'>
           {children}
         </div>
       )}
-    </div>
+    </StyledDropdown>
   )
 }
 

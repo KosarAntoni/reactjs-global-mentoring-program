@@ -1,23 +1,24 @@
 import React, { FC } from 'react'
-import classNames from 'classnames'
 
 import Dropdown from 'components/Dropdown'
+
+import { StyledSortSelect } from './SortSelect.styles'
 
 import { SortSelectProps } from './SortSelect.models'
 
 const SortSelect: FC<SortSelectProps> = ({ className, selectedOption, options, handleSelect }) => {
   return (
-    <div className={classNames('sort-select', className)}>
-      <span className='sort-select__label'>Sort by</span>
+    <StyledSortSelect className={className}>
+      <span className='label'>Sort by</span>
 
       <Dropdown
-          className='sort-select__dropdown'
-          toggle={
-            <span className='sort-select__toggle'>
-              {selectedOption.name}
-            </span>
-          }
-        >
+        className='dropdown'
+        toggle={
+          <span>
+            {selectedOption.name}
+          </span>
+        }
+      >
         <ul>
           {options.map((option) => (
             <li key={option.id}>
@@ -29,7 +30,7 @@ const SortSelect: FC<SortSelectProps> = ({ className, selectedOption, options, h
         </ul>
       </Dropdown>
 
-    </div>
+    </StyledSortSelect>
   )
 }
 

@@ -1,4 +1,8 @@
-.success-modal {
+import styled from '@emotion/styled'
+
+import Modal from 'components/Modal'
+
+export const StyledSuccessModal = styled(Modal)`
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -19,7 +23,7 @@
     text-align: center;
   }
 
-  &__tick {
+  & .tick {
     position: relative;
 
     width: 6.6rem;
@@ -29,7 +33,7 @@
     border-radius: 100%;
 
     &::after {
-      content: "";
+      content: '';
 
       position: absolute;
       transform: rotate(45deg);
@@ -45,4 +49,4 @@
       border-bottom: 0.7rem solid var(--primary-text);
     }
   }
-}
+`

@@ -1,9 +1,25 @@
-.checkbox-field {
+import styled from '@emotion/styled'
+
+export const StyledCheckboxField = styled.label`
   display: inline-flex;
   flex-direction: row;
   align-items: center;
 
-  &__custom-checkbox {
+  & input {
+    position: absolute;
+
+    opacity: 0;
+
+    &:checked ~ .custom-checkbox {
+      background-color: var(--pastele-red);
+
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+
+  & .custom-checkbox {
     position: relative;
 
     width: 1.6rem;
@@ -14,7 +30,7 @@
     border-radius: 4px;
 
     &::after {
-      content: "";
+      content: '';
 
       position: absolute;
       top: 20%;
@@ -30,22 +46,8 @@
     }
   }
 
-  &__label {
+  & .label {
     font-size: 2rem;
     color: var(--primary-text);
   }
-}
-
-.checkbox-field__input {
-  position: absolute;
-
-  opacity: 0;
-
-  &:checked ~ .checkbox-field__custom-checkbox {
-    background-color: var(--pastele-red);
-
-    &::after {
-      opacity: 1;
-    }
-  }
-}
+`

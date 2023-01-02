@@ -2,9 +2,11 @@ import React, { FC, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import classNames from 'classnames'
 
+import { StyledModal } from './Modal.styles'
+
 import { ModalProps } from './Modal.models'
 
-const Modal: FC<ModalProps> = function Modal ({
+const Modal: FC<ModalProps> = function Modal({
   children,
   isOpen,
   handleClose,
@@ -16,7 +18,7 @@ const Modal: FC<ModalProps> = function Modal ({
     setMounted(true)
 
     return () => setMounted(false)
- }, [])
+  }, [])
 
   const onEscPress =
     (event: KeyboardEvent): void => {
@@ -32,23 +34,23 @@ const Modal: FC<ModalProps> = function Modal ({
   })
 
   return mounted
-? (() => {
-  const modalRoot = document.getElementById('modal-root')
-  if (modalRoot === null) throw new Error('Failed to find the modal root element')
+    ? (() => {
+      const modalRoot = document.getElementById('modal-root')
+      if (modalRoot === null) throw new Error('Failed to find the modal root element')
 
-  return createPortal(
-    isOpen && (
-      <div className='modal'>
-        <div className={classNames('modal__content', className)}>
-          <button className='modal__close-button' onClick={handleClose} type='button'>&#x2715;</button>
-          {children}
-        </div>
+      return createPortal(
+        isOpen && (
+          <StyledModal>
+            <div className={classNames('content', className)}>
+              <button className='close-button' onClick={handleClose} type='button'>&#x2715;</button>
+              {children}
+            </div>
 
-        <div className='modal__background' onClick={handleClose}/>
-      </div>
-    ), modalRoot)
-})()
- : null
+            <div className='background' onClick={handleClose} />
+          </StyledModal>
+        ), modalRoot)
+    })()
+    : null
 }
 
 export default Modal

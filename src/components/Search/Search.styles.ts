@@ -1,10 +1,12 @@
-.search {
+import styled from '@emotion/styled'
+
+export const StyledSearch = styled.form`
   display: grid;
   grid-template-columns: 1fr auto;
   grid-template-rows: auto auto;
   gap: 4rem 1.4rem;
 
-  &__heading {
+  & .heading {
     margin: 0;
 
     font-size: 4rem;
@@ -12,11 +14,11 @@
     color: var(--white);
   }
 
-  &__input {
+  & .input {
     grid-area: 2 / 1;
   }
 
-  &__button {
+  & .button {
     grid-area: 2 / 2;
   }
-}
+`

@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import { GENRES } from 'consts/index'
-import { Field, FieldProps, Form, Formik } from 'formik'
+import { Field, FieldProps, Formik } from 'formik'
 import { numberToFormTime, timeToNumber } from 'utilities'
 import * as Yup from 'yup'
 
@@ -10,6 +10,8 @@ import Dropdown from 'components/Dropdown'
 import InputField from 'components/InputField'
 import Modal from 'components/Modal'
 import TextareaField from 'components/TextareaField'
+
+import { StyledMovieEditModal } from './MovieEditModal.styles'
 
 import { MovieEditModalProps } from './MovieEditModal.models'
 
@@ -79,7 +81,7 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
           errors
         }) => {
           return (
-            <Form className='movie-edit-modal' >
+            <StyledMovieEditModal >
               <h2>
                 {heading}
               </h2>
@@ -87,7 +89,7 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
               <Field name='title'>
                 {({ field, meta }: FieldProps) => (
                   <InputField
-                    className='movie-edit-modal__title'
+                    className='title'
                     error={meta.touched && meta.error ? meta.error : undefined}
                     id='title'
                     label={'TITLE'}
@@ -99,7 +101,7 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
               <Field name='release_date'>
                 {({ field, meta }: FieldProps) => (
                   <InputField
-                    className='movie-edit-modal__release-date'
+                    className='release-date'
                     error={meta.touched && meta.error ? meta.error : undefined}
                     id='release_date'
                     label={'RELEASE DATE'}
@@ -124,7 +126,7 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
                 {({ field, meta }: FieldProps) => {
                   return (
                     <InputField
-                      className='movie-edit-modal__rating'
+                      className='rating'
                       error={meta.touched && meta.error ? meta.error : undefined}
                       id='vote_average'
                       label={'RATING'}
@@ -137,10 +139,10 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
                 }}
               </Field>
 
-              <div className='movie-edit-modal__genres'>
+              <div className='genres'>
                 <span>Genre</span>
 
-                <Dropdown toggle={values.genres?.join(', ') || 'Select Genre'}>
+                <Dropdown className='dropdown' toggle={values.genres?.join(', ') || 'Select Genre'}>
                   <ul role='group'>
                     {Array.from(genres).filter((genre) => genre.toLowerCase() !== 'all').map((genre) => (
                       <li key={genre}>
@@ -167,7 +169,7 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
               <Field name='runtime'>
                 {({ field, meta }: FieldProps) => (
                   <InputField
-                    className='movie-edit-modal__runtime'
+                    className='runtime'
                     error={meta.touched && meta.error ? meta.error : undefined}
                     id='runtime'
                     label={'runtime'}
@@ -179,7 +181,7 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
               <Field name='overview'>
                 {({ field, meta }: FieldProps) => (
                   <TextareaField
-                    className='movie-edit-modal__overview'
+                    className='overview'
                     error={meta.touched && meta.error ? meta.error : undefined}
                     id='overview'
                     label={'overview'}
@@ -192,7 +194,7 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
                 <Button style='outline' type='reset'>Reset</Button>
                 <Button type='submit'>Submit</Button>
               </footer>
-            </Form>
+            </StyledMovieEditModal>
           )
         }}
       </Formik>

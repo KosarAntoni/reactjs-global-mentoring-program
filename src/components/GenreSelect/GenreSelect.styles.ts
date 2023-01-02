@@ -1,8 +1,10 @@
-.genre-select {
+import styled from '@emotion/styled'
+
+export const StyledGenreSelect = styled.div`
   display: flex;
   flex-direction: row;
 
-  &__genre {
+  & .genre {
     cursor: pointer;
 
     margin-right: 3rem;
@@ -19,7 +21,7 @@
       position: relative;
 
       &::after {
-        content: "";
+        content: '';
 
         position: absolute;
         right: 0;
@@ -33,4 +35,4 @@
       }
     }
   }
-}
+`

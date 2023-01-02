@@ -1,4 +1,6 @@
-.movie-card {
+import styled from '@emotion/styled'
+
+export const StyledMovieCard = styled.div`
   position: relative;
 
   img {
@@ -43,7 +45,7 @@
     }
   }
 
-  &__select {
+  & .select {
     position: absolute;
     top: 1.8rem;
     right: 1.8rem;
@@ -97,8 +99,8 @@
   }
 
   &:hover {
-    .movie-card__select {
+    .select {
       display: flex;
     }
   }
-}
+`
