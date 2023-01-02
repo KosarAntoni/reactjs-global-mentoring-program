@@ -5,7 +5,7 @@ export const StyledMovieList = styled.div`
   margin: 0 auto;
   padding-bottom: 7rem;
 `
-export const StyledMovieListHeader = styled.p`
+export const StyledMovieListHeader = styled.header`
   position: relative;
 
   display: flex;
