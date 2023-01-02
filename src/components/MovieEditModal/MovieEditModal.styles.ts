@@ -1,4 +1,7 @@
-.movie-edit-modal {
+import styled from '@emotion/styled'
+import { Form } from 'formik'
+
+export const StyledMovieEditModal = styled(Form)`
   display: grid;
   grid-auto-flow: row;
   grid-template-columns: 60% 40%;
@@ -15,38 +18,40 @@
     text-transform: uppercase;
   }
 
-  &__genres {
+  & .genres {
     & > span {
       color: var(--pastele-red);
       text-transform: uppercase;
     }
 
-    button {
-      padding: 1.8rem;
+    .dropdown {
+      button {
+        padding: 1.8rem;
 
-      color: var(--primary-text);
+        color: var(--primary-text);
 
-      opacity: 0.7;
-      background-color: var(--light-gray);
-      border: none;
-      border-radius: 4px;
-    }
+        opacity: 0.7;
+        background-color: var(--light-gray);
+        border: none;
+        border-radius: 4px;
+      }
 
-    ul {
-      margin: 0;
-      padding: 0;
+      ul {
+        margin: 0;
+        padding: 0;
 
-      list-style: none;
+        list-style: none;
+      }
     }
   }
 
-  &__runtime {
+  & .runtime {
     .input {
       padding: 1.6rem 1.8rem;
     }
   }
 
-  &__overview {
+  & .overview {
     grid-column: 1 / 3;
   }
 
@@ -56,4 +61,4 @@
     gap: 1.6rem;
     justify-content: flex-end;
   }
-}
+`

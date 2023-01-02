@@ -1,10 +1,12 @@
-.dropdown {
+import styled from '@emotion/styled'
+
+export const StyledDropdown = styled.div`
   position: relative;
 
   display: flex;
   flex-direction: column;
 
-  &__toggle {
+  & .toggle {
     cursor: pointer;
 
     position: relative;
@@ -19,7 +21,7 @@
     border: none;
 
     &::after {
-      content: "";
+      content: '';
 
       position: absolute;
       right: 0.8rem;
@@ -33,7 +35,7 @@
     }
   }
 
-  &--open {
+  &.open {
     .dropdown__toggle {
       &::after {
         transform: rotate(-225deg) translateY(25%) translateX(25%);
@@ -41,7 +43,7 @@
     }
   }
 
-  &__content {
+  & .content {
     position: absolute;
     z-index: 10;
     top: 100%;
@@ -53,4 +55,4 @@
 
     background-color: var(--page-background);
   }
-}
+`

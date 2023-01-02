@@ -1,13 +1,13 @@
 import React, { FC } from 'react'
 
-import Modal from 'components/Modal'
+import { StyledSuccessModal } from './SuccessModal.styles'
 
 import { SuccessModalProps } from './SuccessModal.models'
 
 const SuccessModal: FC<SuccessModalProps> = ({ isOpen, handleClose, description }) => {
   return (
-    <Modal {...{ isOpen, handleClose }} className='success-modal'>
-      <div className='success-modal__tick'/>
+    <StyledSuccessModal {...{ isOpen, handleClose }} >
+      <div className='tick' />
       <h2>congratulations !</h2>
 
       {description && (
@@ -15,7 +15,7 @@ const SuccessModal: FC<SuccessModalProps> = ({ isOpen, handleClose, description 
           {description}
         </p>
       )}
-    </Modal>
+    </StyledSuccessModal>
   )
 }
 

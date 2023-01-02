@@ -1,4 +1,6 @@
-.modal {
+import styled from '@emotion/styled'
+
+export const StyledModal = styled.div`
   position: fixed;
   top: 0;
   right: 0;
@@ -9,21 +11,18 @@
   align-items: center;
   justify-content: center;
 
-  &__content {
+  & .content {
     position: relative;
     z-index: var(--modal-content);
 
     padding: 6rem;
 
     background-color: var(--page-background);
-    box-shadow:
-      0 0 2px rgb(0 0 0 / 10%),
-      0 2px 10px rgb(0 0 0 / 7%),
-      0 10px 20px rgb(0 0 0 / 5%),
-      0 10px 50px rgb(0 0 0 / 5%);
+    box-shadow: 0 0 2px rgb(0 0 0 / 10%), 0 2px 10px rgb(0 0 0 / 7%),
+      0 10px 20px rgb(0 0 0 / 5%), 0 10px 50px rgb(0 0 0 / 5%);
   }
 
-  &__background {
+  & .background {
     position: absolute;
     z-index: var(--ground);
     top: 0;
@@ -36,7 +35,7 @@
     backdrop-filter: blur(12px);
   }
 
-  &__close-button {
+  & .close-button {
     cursor: pointer;
 
     position: absolute;
@@ -52,4 +51,4 @@
     background: none;
     border: none;
   }
-}
+`

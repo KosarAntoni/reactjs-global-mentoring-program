@@ -1,10 +1,12 @@
-.movie-details {
+import styled from '@emotion/styled'
+
+export const StyledMovieDetails = styled.div`
   display: flex;
   flex-direction: row;
 
   color: var(--primary-text);
 
-  &__heading {
+  & .heading {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -32,7 +34,7 @@
     }
   }
 
-  &__genres {
+  & .genres {
     margin-top: 0;
 
     font-size: 1.4rem;
@@ -40,7 +42,7 @@
     opacity: 0.5;
   }
 
-  &__information {
+  & .information {
     display: inline-grid;
     grid-template-columns: auto auto;
     column-gap: 5rem;
@@ -49,7 +51,7 @@
     color: var(--pastele-red);
   }
 
-  &__overview {
+  & .overview {
     font-size: 2rem;
 
     opacity: 0.5;
@@ -59,4 +61,4 @@
     width: 32rem;
     margin-right: 5.8rem;
   }
-}
+`

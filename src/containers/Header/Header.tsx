@@ -1,6 +1,4 @@
 import React, { FC, useEffect, useState } from 'react'
-// import background from 'assets/header-background.png'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { addMovie, clearSingleMovie, fetchSingleMovie, selectSingleMovie } from 'store/moviesSlice'
@@ -8,10 +6,10 @@ import { removeFromParams, urlSearchParams } from 'utilities'
 
 import Button from 'components/Button'
 import Logo from 'components/Logo'
-import MovieDetails from 'components/MovieDetails'
 import MovieEditModal from 'components/MovieEditModal'
-import Search from 'components/Search'
 import SuccessModal from 'components/SuccessModal'
+
+import { StyledHeader, StyledHeaderBackground, StyledHeaderDetails, StyledHeaderSearch, StyledSearchButton } from './Header.styles'
 
 const Header: FC = () => {
   const dispatch = useAppDispatch()
@@ -46,36 +44,29 @@ const Header: FC = () => {
 
   return (
     <>
-      <header className='header'>
+      <StyledHeader>
         <Logo />
 
         {movie
-          ? <button className='header__search-button' onClick={handleSearchButtonClick} type='button' />
-          : <Button onClick={() => setIsAddModalOpen(true)} style='transparent'>+ add movie</Button>}
+          ? <StyledSearchButton onClick={handleSearchButtonClick} type='button' />
+          : <Button onClick={() => setIsAddModalOpen(true)} variant='transparent'>+ add movie</Button>}
 
         {movie
-          ? <MovieDetails {...movie} className='header__movie-details' />
+          ? <StyledHeaderDetails {...movie} />
           : (
             <>
-              {/* <img
+              <StyledHeaderBackground
                 alt='header-background'
-                className='header__background'
-                src={background}
-              /> */}
-
-              <Image
-                alt='header-background'
-                className='header__background'
                 height='543'
                 src='/header-background.png'
                 width='1000'
               />
 
-              <Search className='header__search' defaultValue={searchQuery} handleSearchSubmit={handleSearchSubmit} />
+              <StyledHeaderSearch defaultValue={searchQuery} handleSearchSubmit={handleSearchSubmit} />
             </>
           )}
 
-      </header>
+      </StyledHeader>
 
       <MovieEditModal
         handleClose={() => setIsAddModalOpen(false)}

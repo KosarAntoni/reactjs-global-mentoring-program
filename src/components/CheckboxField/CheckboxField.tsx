@@ -1,18 +1,19 @@
 import React, { FC } from 'react'
-import classNames from 'classnames'
+
+import { StyledCheckboxField } from './CheckboxField.styles'
 
 import { CheckboxFieldProps } from './CheckboxField.models'
 
 const CheckboxField: FC<CheckboxFieldProps> = ({ className, label, id, ...props }) => {
   return (
-    <label className={classNames('checkbox-field', className)} htmlFor={id}>
-      <input type='checkbox' {...{ id, ...props }} className='checkbox-field__input'/>
-      <span className='checkbox-field__custom-checkbox' />
+    <StyledCheckboxField className={className} htmlFor={id}>
+      <input type='checkbox' {...{ id, ...props }} />
+      <span className='custom-checkbox' />
 
-      <span className='checkbox-field__label'>
+      <span className='label'>
         {label}
       </span>
-    </label>
+    </StyledCheckboxField>
   )
 }
 

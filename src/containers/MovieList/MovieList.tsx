@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react'
-import classNames from 'classnames'
 import { GENRES, SORT_OPTIONS } from 'consts'
 import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
@@ -14,6 +13,8 @@ import MovieEditModal from 'components/MovieEditModal'
 import SortSelect from 'components/SortSelect'
 import { SortOption } from 'components/SortSelect/SortSelect.models'
 import SuccessModal from 'components/SuccessModal'
+
+import { StyledMovieList, StyledMovieListCount, StyledMovieListHeader, StyledMovieListList } from './MovieList.styles'
 
 import { MovieListProps } from './MovieList.models'
 
@@ -101,21 +102,21 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
 
   return (
     <>
-      <div className={classNames('movie-list', className)}>
-        <header>
+      <StyledMovieList className={className}>
+        <StyledMovieListHeader>
           <GenreSelect genres={GENRES} handleSelect={handleGenreSelect} selectedGenre={selectedGenre} />
           <SortSelect handleSelect={handleSortSelect} options={SORT_OPTIONS} selectedOption={sortOption} />
-        </header>
+        </StyledMovieListHeader>
 
-        <p className='movie-list__count'>
+        <StyledMovieListCount>
           <b>
             {movies.length}
             {' '}
           </b>
           movies found
-        </p>
+        </StyledMovieListCount>
 
-        <div className='movie-list__list'>
+        <StyledMovieListList>
           {movies.map(({
             id,
             genres,
@@ -139,8 +140,8 @@ const MovieList: FC<MovieListProps> = ({ className }) => {
               }}
             />
           ))}
-        </div>
-      </div>
+        </StyledMovieListList>
+      </StyledMovieList>
 
       <MovieDeleteModal
         handleClose={() => setIsDeleteModalOpen(false)}

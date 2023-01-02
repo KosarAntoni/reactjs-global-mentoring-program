@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
-import classNames from 'classnames'
 import { formatGenres, numberToTime } from 'utilities'
+
+import { StyledMovieDetails } from './MovieDetails.styles'
 
 import { MovieDetailsProps } from './MovieDetails.models'
 
@@ -17,11 +18,11 @@ const MovieDetails: FC<MovieDetailsProps> = ({
   const year = new Date(releaseDate).getFullYear()
 
   return (
-    <div className={classNames('movie-details', className)}>
+    <StyledMovieDetails className={className}>
       <img alt={title} src={posterPath} />
 
       <div>
-        <div className='movie-details__heading'>
+        <div className='heading'>
           <h2>
             {title}
           </h2>
@@ -31,11 +32,11 @@ const MovieDetails: FC<MovieDetailsProps> = ({
           </span>
         </div>
 
-        <p className='movie-details__genres'>
+        <p className='genres'>
           {formatGenres(genres)}
         </p>
 
-        <div className='movie-details__information'>
+        <div className='information'>
           <span>
             {year}
           </span>
@@ -45,11 +46,11 @@ const MovieDetails: FC<MovieDetailsProps> = ({
           </span>
         </div>
 
-        <p className='movie-details__overview'>
+        <p className='overview'>
           {overview}
         </p>
       </div>
-    </div>
+    </StyledMovieDetails>
   )
 }
 

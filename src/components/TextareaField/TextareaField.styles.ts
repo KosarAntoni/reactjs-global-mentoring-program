@@ -1,4 +1,6 @@
-.textarea-field {
+import styled from '@emotion/styled'
+
+export const StyledTextareaField = styled.label`
   position: relative;
 
   display: flex;
@@ -24,18 +26,18 @@
     }
   }
 
-  &__label {
+  & .label {
     font-size: 1.6rem;
     font-weight: 500;
     color: var(--pastele-red);
     text-transform: uppercase;
   }
 
-  &__error {
+  & .error {
     position: absolute;
     bottom: 0;
 
     font-size: 1.4rem;
     color: var(--pastele-red);
   }
-}
+`
