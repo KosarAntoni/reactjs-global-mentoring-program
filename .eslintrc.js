@@ -17,7 +17,7 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.json'
   },
-  plugins: ['react', 'simple-import-sort'],
+  plugins: ['react', 'simple-import-sort', '@emotion'],
   rules: {
     '@typescript-eslint/triple-slash-reference': 0,
     '@typescript-eslint/explicit-function-return-type': 0,
