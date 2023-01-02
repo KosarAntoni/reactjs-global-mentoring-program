@@ -191,7 +191,7 @@ const MovieEditModal: FC<MovieEditModalProps> = ({ isOpen, handleClose, handleSu
               </Field>
 
               <footer>
-                <Button style='outline' type='reset'>Reset</Button>
+                <Button type='reset' variant='outline'>Reset</Button>
                 <Button type='submit'>Submit</Button>
               </footer>
             </StyledMovieEditModal>

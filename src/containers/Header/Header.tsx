@@ -1,5 +1,4 @@
 import React, { FC, useEffect, useState } from 'react'
-import Image from 'next/image'
 import { useRouter } from 'next/router'
 import { useAppDispatch, useAppSelector } from 'store/hooks'
 import { addMovie, clearSingleMovie, fetchSingleMovie, selectSingleMovie } from 'store/moviesSlice'
@@ -7,12 +6,10 @@ import { removeFromParams, urlSearchParams } from 'utilities'
 
 import Button from 'components/Button'
 import Logo from 'components/Logo'
-import MovieDetails from 'components/MovieDetails'
 import MovieEditModal from 'components/MovieEditModal'
-import Search from 'components/Search'
 import SuccessModal from 'components/SuccessModal'
 
-import { StyledHeader } from './Header.styles'
+import { StyledHeader, StyledHeaderBackground, StyledHeaderDetails, StyledHeaderSearch, StyledSearchButton } from './Header.styles'
 
 const Header: FC = () => {
   const dispatch = useAppDispatch()
@@ -51,22 +48,21 @@ const Header: FC = () => {
         <Logo />
 
         {movie
-          ? <button className='search-button' onClick={handleSearchButtonClick} type='button' />
-          : <Button onClick={() => setIsAddModalOpen(true)} style='transparent'>+ add movie</Button>}
+          ? <StyledSearchButton onClick={handleSearchButtonClick} type='button' />
+          : <Button onClick={() => setIsAddModalOpen(true)} variant='transparent'>+ add movie</Button>}
 
         {movie
-          ? <MovieDetails {...movie} className='header__movie-details' />
+          ? <StyledHeaderDetails {...movie} />
           : (
             <>
-              <Image
+              <StyledHeaderBackground
                 alt='header-background'
-                className='background'
                 height='543'
                 src='/header-background.png'
                 width='1000'
               />
 
-              <Search className='search' defaultValue={searchQuery} handleSearchSubmit={handleSearchSubmit} />
+              <StyledHeaderSearch defaultValue={searchQuery} handleSearchSubmit={handleSearchSubmit} />
             </>
           )}
 

@@ -5,10 +5,10 @@ import { StyledButton } from './Button.styles'
 import { ButtonProps } from './Button.models'
 
 const Button: FC<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> =
-  ({ children, style = 'solid', className, ...props }) => (
+  ({ children, variant = 'solid', className, ...props }) => (
     <StyledButton
       className={className}
-      variant={style}
+      variant={variant}
       {...props}
     >
       {children}
